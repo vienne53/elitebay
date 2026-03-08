@@ -724,8 +724,7 @@
             }
         }
 
-        // Formspree：请到 formspree.io 注册并创建表单，将下方 YOUR_FORM_ID 替换为您的 Form ID，并在 Formspree 后台设置接收邮箱为 vienne@elitebay.cn
-        var FORMSPREEE_FORM_ID = 'YOUR_FORM_ID';
+        // 预约表单：提交后打开访客邮箱，预填发给 vienne@elitebay.cn 的邮件，无需其他配置
         function submitContactForm(e) {
             e.preventDefault();
             var form = document.getElementById('contactForm');
@@ -736,32 +735,11 @@
             var 城市 = (form.querySelector('input[name="城市"]') && form.querySelector('input[name="城市"]').value) ? form.querySelector('input[name="城市"]').value.trim() : '';
             var 线上线下 = (form.querySelector('select[name="线上线下"]') && form.querySelector('select[name="线上线下"]').value) ? form.querySelector('select[name="线上线下"]').value : '';
             var 备注 = (form.querySelector('input[name="备注"]') && form.querySelector('input[name="备注"]').value) ? form.querySelector('input[name="备注"]').value.trim() : '';
-            var btn = form.querySelector('button[type="submit"]');
-            if (btn) { btn.disabled = true; btn.textContent = '提交中…'; }
-            fetch('https://formspree.io/f/' + FORMSPREEE_FORM_ID, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: name,
-                    phone: phone,
-                    '需求': 需求 || '(未选)',
-                    '城市': 城市 || '(未填)',
-                    '线上线下': 线上线下 || '(未选)',
-                    '备注': 备注 || ''
-                })
-            }).then(function(r) {
-                if (r.ok) {
-                    if (btn) { btn.textContent = '提交成功'; }
-                    alert('提交成功，我们会尽快联系您。');
-                    closeModal({ target: { tagName: 'BUTTON' } });
-                } else {
-                    if (btn) { btn.disabled = false; btn.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 提交'; }
-                    alert('提交失败，请稍后再试或直接添加微信 Vienne71。');
-                }
-            }).catch(function() {
-                if (btn) { btn.disabled = false; btn.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 提交'; }
-                alert('提交失败，请稍后再试或直接添加微信 Vienne71。');
-            });
+            var body = '姓名：' + name + '\n电话：' + phone + '\n需求：' + (需求 || '未选') + '\n城市：' + (城市 || '未填') + '\n上课方式：' + (线上线下 || '未选') + (备注 ? '\n备注：' + 备注 : '');
+            var mailto = 'mailto:vienne@elitebay.cn?subject=' + encodeURIComponent('预约免费咨询 - EliteBay') + '&body=' + encodeURIComponent(body);
+            window.location.href = mailto;
+            alert('已为您打开邮件，请发送后即可。若未打开邮箱，请直接添加微信 Vienne71。');
+            closeModal({ target: { tagName: 'BUTTON' } });
             return false;
         }
 
