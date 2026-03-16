@@ -213,14 +213,16 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-28 pb-16 lg:pt-32 lg:pb-24">
-        <div class="max-w-5xl mx-auto px-6">
+    <section class="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-24">
+        <!-- Hero background image -->
+        <img src="image/gra.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none">
+        <div class="relative max-w-5xl mx-auto px-6">
             <div class="max-w-2xl fade-in">
                 <h1 class="text-[32px] lg:text-[40px] leading-tight font-serif-sc font-medium text-gray-900 mb-4 tracking-tight" data-i18n-key="hero.title">
                     为孩子提供 <em class="not-italic text-blue-900">顶级</em> 学习陪伴体验
                 </h1>
                 <p class="text-[15px] text-gray-600 mb-8 leading-relaxed max-w-xl" data-i18n-key="hero.subtitle">
-                    我们的教师团队来自 QS 全球前 200/前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。
+                    我们团队来自 QS 全球前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。
                 </p>
                 
                 <div class="flex flex-wrap gap-3 mb-10">
@@ -254,7 +256,7 @@
             <blockquote class="text-[22px] lg:text-[26px] leading-snug font-serif-sc font-medium text-gray-900 mb-6" data-i18n-key="quote.text">
                 孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求，让他的学习状态完全改观。
             </blockquote>
-            <p class="text-[13px] text-gray-500" data-i18n-key="quote.caption">— 现在他每天都期待和老师上课</p>
+            <p class="text-[13px] text-gray-500" data-i18n-key="quote.caption">— 现在他每天都期待和你们上课</p>
         </div>
     </section>
 
@@ -266,7 +268,7 @@
                     看到真正的 <em class="not-italic text-blue-900">专业陪伴</em> 在发生
                 </h2>
                 <p class="text-[15px] text-gray-600 leading-relaxed" data-i18n-key="about.subtitle">
-                    我们的教师以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。
+                    我们以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。
                 </p>
             </div>
 
@@ -321,7 +323,7 @@
                     <div class="icon-circle">
                         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                     </div>
-                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card1.title">国际学校学业伴学</h3>
+                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card1.title">国际学校学业陪伴</h3>
                     <p class="text-[12px] text-gray-600 leading-relaxed" data-i18n-key="services.card1.desc">教研团队来自 QS 前 15 藤校，教授的不止于知识，更在于终身学习的方法和思维能力。</p>
                 </div>
 
@@ -452,13 +454,15 @@
                 </div>
 
                 <div class="fade-in" style="transition-delay: 0.2s;">
-                    <div class="bg-gray-100 rounded-2xl p-8 aspect-square flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="w-24 h-24 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
-                                <svg class="w-12 h-12 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <div class="relative bg-gray-100 rounded-2xl p-8 aspect-square flex items-center justify-center overflow-hidden">
+                        <!-- Right card background image -->
+                        <img src="image/bella.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none select-none">
+                        <div class="relative text-center">
+                            <div class="w-24 h-24 bg-white/50 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+                                <svg class="w-12 h-12 text-blue-900/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             </div>
-                            <p class="text-gray-600 text-[14px]" data-i18n-key="ai.side1">海外学习-生活-工作全链陪伴</p>
-                            <p class="text-gray-400 text-[12px] mt-1" data-i18n-key="ai.side2">依托团队自身大量资源链接海外企业资源</p>
+                            <p class="text-white/80 text-[14px]" data-i18n-key="ai.side1">海外学习-生活-工作全链陪伴</p>
+                            <p class="text-white/80 text-[12px] mt-1" data-i18n-key="ai.side2">依托团队自身大量资源链接海外企业资源</p>
                         </div>
                     </div>
                 </div>
@@ -484,11 +488,11 @@
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">V</div>
                             <div>
-                                <h3 class="text-[15px] font-semibold text-gray-900">Vienne</h3>
-                                <p class="text-[12px] text-gray-500">香港大学硕士</p>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.vienne.name">Vienne</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.vienne.role">香港大学硕士</p>
                             </div>
                         </div>
-                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.vienne.desc">
                             依托2年国际教育教学经验心得制定陪伴式教学SOP，至今已成功助力300+学员留学考试中快速提升能力与自信。
                         </p>
                     </div>
@@ -499,11 +503,11 @@
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">S</div>
                             <div>
-                                <h3 class="text-[15px] font-semibold text-gray-900">Syvlia</h3>
-                                <p class="text-[12px] text-gray-500">香港城市大学硕士</p>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.sylvia.name">Syvlia</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.sylvia.role">香港城市大学硕士</p>
                             </div>
                         </div>
-                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.sylvia.desc">
                             深耕留学申请，熟悉英美澳港多国院校体系，累计指导同学斩获100+份世界名校offer。
                         </p>
                     </div>
@@ -514,11 +518,11 @@
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-purple-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">A</div>
                             <div>
-                                <h3 class="text-[15px] font-semibold text-gray-900">Ava</h3>
-                                <p class="text-[12px] text-gray-500">美国Top10硕士 · 教研主管</p>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.ava.name">Ava</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.ava.role">美国Top10硕士 · 教研主管</p>
                             </div>
                         </div>
-                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.ava.desc">
                             深耕英语教学、师资培训与课程设计多年，覆盖初高中英语、日常/商务/雅思/面试口语全学段。
                         </p>
                     </div>
@@ -529,11 +533,11 @@
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-teal-800 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">L</div>
                             <div>
-                                <h3 class="text-[15px] font-semibold text-gray-900">Louise</h3>
-                                <p class="text-[12px] text-gray-500">帝国理工硕士 · 雅思8.5</p>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.louise.name">Louise</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.louise.role">帝国理工硕士 · 雅思8.5</p>
                             </div>
                         </div>
-                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.louise.desc">
                             3年教学经验，英本英硕独特教学体系，学员雅思通过率98%，阅读听力满分口语8分。
                         </p>
                     </div>
@@ -544,11 +548,11 @@
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-rose-800 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">T</div>
                             <div>
-                                <h3 class="text-[15px] font-semibold text-gray-900">Tiffany</h3>
-                                <p class="text-[12px] text-gray-500">悉尼大学硕士</p>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.tiffany.name">Tiffany</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.tiffany.role">悉尼大学硕士</p>
                             </div>
                         </div>
-                        <p class="text-[13px] text-gray-600 leading-relaxed">
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.tiffany.desc">
                             金融和国际商务双硕士，擅长跨国企业课程以及市场营销，HD机构4年经验。
                         </p>
                     </div>
@@ -574,7 +578,7 @@
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-12 fade-in">
                 <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900" data-i18n-key="testimonials.title">
-                    家长们这样 <em class="not-italic text-blue-900">评价</em> 我们的服务
+                    家长们这样 <em class="not-italic text-blue-900">评价</em> 我们的陪伴服务
                 </h2>
             </div>
 
@@ -588,7 +592,7 @@
                         <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     </div>
                     <p class="text-gray-700 mb-4 text-[13px] leading-relaxed" data-i18n-key="testimonials.t1.text">
-                        孩子跟着陪伴师学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。
+                        孩子学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。
                     </p>
                     <div class="flex items-center gap-2">
                         <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
@@ -628,7 +632,7 @@
                         <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     </div>
                     <p class="text-gray-700 mb-4 text-[13px] leading-relaxed" data-i18n-key="testimonials.t3.text">
-                        孩子基础比较薄弱，陪伴师帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。
+                        孩子基础比较薄弱，你们帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。
                     </p>
                     <div class="flex items-center gap-2">
                         <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
@@ -765,14 +769,14 @@
                 'nav.team': '团队',
                 'nav.contact': '联系我们',
                 'hero.title': '为孩子提供 <em class="not-italic text-blue-900">顶级</em> 学习陪伴体验',
-                'hero.subtitle': '团队来自 QS 全球前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。',
+                'hero.subtitle': '我们来自 QS 全球前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。',
                 'hero.cta.primary': '预约免费咨询',
                 'hero.cta.secondary': '查看服务详情',
                 'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>雅思保分计划',
                 'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>名校申请指导',
                 'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>海外求职陪跑',
                 'about.title': '看到真正的 <em class="not-italic text-blue-900">专业陪伴</em> 在发生',
-                'about.subtitle': '我们的陪伴师以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。',
+                'about.subtitle': '我们以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。',
                 'services.title': '为每位学生 <em class="not-italic text-blue-900">量身打造</em> 的学习方案',
                 'services.subtitle': '无论是需要系统性的长期陪伴，还是短期学习提升，我们都会根据孩子的性格、基础与目标制定最适合的学习方案。',
                 'ai.badge': '智能化教学',
@@ -782,8 +786,8 @@
                 'cta.subtitle': '我们坚信每一个孩子都有潜力改变世界，我们的目标就是最大化发挥孩子自身优势。',
                 'cta.btn1': '预约免费咨询',
                 'cta.btn2': '查看服务案例',
-                'quote.text': '孩子以前对学习非常抵触，但自从遇到你们的陪伴师后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求，让他的学习状态完全改观。',
-                'quote.caption': '— 现在他每天都期待和陪伴师上课',
+                'quote.text': '孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求，让他的学习状态完全改观。',
+                'quote.caption': '— 现在他每天都期待上课',
                 'about.mission.title': '我们的使命',
                 'about.mission.desc': '以 AI、心理、脑科学为核，重构教育范式。唤醒孩子天赋，领航菁英成长，让每个孩子都具备改变世界的潜能。',
                 'about.vision.title': '我们的愿景',
@@ -817,17 +821,32 @@
                 'ai.side2': '依托团队自身大量资源链接海外企业资源',
                 'team.title': '来自 <em class="not-italic text-blue-900">顶尖名校</em> 的导师团队',
                 'team.subtitle': 'TQS TOP 15 海外硕博，专注提升学生学习内驱力、专注力，帮助学生培养终生受用的学习系统。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大学硕士',
+                'team.vienne.desc': '依托2年国际教育教学经验心得制定陪伴式教学SOP，至今已成功助力300+学员留学考试中快速提升能力与自信。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大学硕士',
+                'team.sylvia.desc': '深耕留学申请，熟悉英美澳港多国院校体系，累计指导同学斩获100+份世界名校offer。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '美国Top10硕士 · 教研主管',
+                'team.ava.desc': '深耕英语教学、师资培训与课程设计多年，覆盖初高中英语、日常/商务/雅思/面试口语全学段。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '帝国理工硕士 · 雅思8.5',
+                'team.louise.desc': '3年教学经验，英本英硕独特教学体系，学员雅思通过率98%，阅读听力满分口语8分。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '悉尼大学硕士',
+                'team.tiffany.desc': '金融和国际商务双硕士，擅长跨国企业课程以及市场营销，HD机构4年经验。',
                 'team.join_title': '加入天才计划',
                 'team.join_subtitle': '成为定义下一代精英教育的引领者',
                 'team.join_btn': '点击扫码咨询',
                 'testimonials.title': '家长们这样 <em class="not-italic text-blue-900">评价</em> 我们的陪伴服务',
-                'testimonials.t1.text': '孩子跟着陪伴师学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。',
+                'testimonials.t1.text': '孩子学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。',
                 'testimonials.t1.name': '李女士',
                 'testimonials.t1.role': '国际学校家长',
-                'testimonials.t2.text': '孩子以前对学习非常抵触，但自从遇到你们的陪伴师后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求。',
+                'testimonials.t2.text': '孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求。',
                 'testimonials.t2.name': '王先生',
                 'testimonials.t2.role': '雅思学员家长',
-                'testimonials.t3.text': '孩子基础比较薄弱，陪伴师帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。',
+                'testimonials.t3.text': '孩子基础比较薄弱，你们帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。',
                 'testimonials.t3.name': '张女士',
                 'testimonials.t3.role': '美本申请家长',
                 'footer.tagline': '语言培训 · 留学 · 国际教育',
@@ -893,6 +912,21 @@
                 'ai.side2': 'Backed by our team\'s resources and overseas employer links',
                 'team.title': 'Mentors from <em class="not-italic text-blue-900">top universities</em> worldwide',
                 'team.subtitle': 'QS Top 15 overseas masters and PhDs, focused on motivation, focus and a learning system that lasts a lifetime.',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': 'Master\'s degree, The University of Hong Kong',
+                'team.vienne.desc': 'With 2 years of international education experience, she has built a companionship-based teaching SOP and helped 300+ students quickly improve ability and confidence in exams.',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': 'Master\'s degree, City University of Hong Kong',
+                'team.sylvia.desc': 'Specialised in study abroad applications, familiar with admissions systems across the UK, US, Australia and Hong Kong, guiding students to 100+ offers from top universities.',
+                'team.ava.name': 'Ava',
+                'team.ava.role': 'Master\'s degree, Top 10 US university · Academic Director',
+                'team.ava.desc': 'Years of experience in English teaching, teacher training and curriculum design, covering secondary English, daily/business English, IELTS and interview speaking.',
+                'team.louise.name': 'Louise',
+                'team.louise.role': 'Master\'s degree, Imperial College London · IELTS 8.5',
+                'team.louise.desc': '3 years of teaching experience with a unique UK-undergrad and postgrad teaching system; IELTS pass rate 98% with full scores in reading and listening and 8.0 in speaking.',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': 'Master\'s degree, University of Sydney',
+                'team.tiffany.desc': 'Double master\'s degrees in Finance and International Business, experienced in multinational business courses and marketing, with 4 years at an HD education institution.',
                 'team.join_title': 'Join the Talent Programme',
                 'team.join_subtitle': 'Help define the next generation of elite education',
                 'team.join_btn': 'Scan to contact',
@@ -969,6 +1003,21 @@
                 'ai.side2': '自社リソースと海外企業との連携でサポート',
                 'team.title': '<em class="not-italic text-blue-900">トップ大学</em> 出身のメンター陣',
                 'team.subtitle': 'QSトップ15海外修士・博士。学習意欲・集中力の向上と、一生使える学習システムの構築に注力。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大学修士',
+                'team.vienne.desc': '国際教育現場での2年間の経験をもとに、伴走型SOPを構築。これまで300名以上の留学試験でスコアアップと自信向上をサポート。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大学修士',
+                'team.sylvia.desc': '留学出願サポートに精通し、英米豪・香港の出願制度を熟知。これまで100件以上の世界トップ大学オファー獲得を支援。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '米国トップ10大学修士・教研ディレクター',
+                'team.ava.desc': '英語教育・講師トレーニング・カリキュラム設計の豊富な経験を持ち、中高英語から日常・ビジネス英語、IELTS・面接対策まで幅広く担当。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': 'インペリアル・カレッジ・ロンドン修士・IELTS 8.5',
+                'team.louise.desc': '3年以上の指導経験。独自の英国式カリキュラムで、IELTS合格率98％、リスニング・リーディング満点、スピーキング8.0を達成した実績を持つ。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': 'シドニー大学修士',
+                'team.tiffany.desc': '金融・国際ビジネスのダブル修士号を持ち、多国籍企業のケーススタディと学生のキャリア設計を結びつける指導が得意。HD教育機関で4年以上の経験。',
                 'team.join_title': '天才プログラムに参加',
                 'team.join_subtitle': '次世代エリート教育を共に創る',
                 'team.join_btn': 'スキャンして問い合わせ',
@@ -1045,6 +1094,21 @@
                 'ai.side2': '팀 자체 자원과 해외 기업 연계로 지원',
                 'team.title': '<em class="not-italic text-blue-900">최상위 대학</em> 출신 멘토팀',
                 'team.subtitle': 'QS 상위 15 해외 석·박사. 학습 동기·집중력 향상과 평생 쓸 학습 시스템 구축에 집중합니다.',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '홍콩대학교 석사',
+                'team.vienne.desc': '국제 교육 현장에서 2년간 쌓은 경험을 바탕으로 동반형 SOP를 구축했으며, 지금까지 300+명의 유학 시험에서 실력과 자신감 향상을 도왔습니다.',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '홍콩 시티대학교 석사',
+                'team.sylvia.desc': '유학 지원에 특화되어 있으며 영·미·호·홍콩 입시 제도를 잘 이해하고 있습니다. 지금까지 100건 이상의 세계 명문대 합격을 이끌었습니다.',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '미국 Top 10 대학 석사 · 교研 디렉터',
+                'team.ava.desc': '영어 교육, 교사 트레이닝, 커리큘럼 설계에 다년간 경험이 있으며, 중·고등 영어부터 일상/비즈니스 영어, IELTS 및 인터뷰 스피킹까지 전 학년을 담당합니다.',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '임페리얼 칼리지 런던 석사 · IELTS 8.5',
+                'team.louise.desc': '3년 이상 티칭 경험과 영국식 학습 시스템을 바탕으로 IELTS 합격률 98%, 리딩·리스닝 만점, 스피킹 8.0의 성과를 보유하고 있습니다.',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '시드니대학교 석사',
+                'team.tiffany.desc': '금융 및 국제경영 복수 석사로, 다국적 기업 케이스와 학생의 커리어 설계를 연결하는 데 강점이 있으며, HD 교육기관 4년 경력을 보유하고 있습니다.',
                 'team.join_title': '천재 프로그램 참여',
                 'team.join_subtitle': '차세대 엘리트 교육을 함께 정의합니다',
                 'team.join_btn': '스캔하여 문의',
@@ -1121,6 +1185,21 @@
                 'ai.side2': '依託團隊自身大量資源連結海外企業資源',
                 'team.title': '來自 <em class="not-italic text-blue-900">頂尖名校</em> 嘅導師團隊',
                 'team.subtitle': 'TQS TOP 15 海外碩博，專注提升學生學習內驅力、專注力，幫助學生培養終生受用嘅學習系統。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大學碩士',
+                'team.vienne.desc': '喺國際教育一線累積兩年經驗，搭建出陪伴式教學 SOP，至今幫助 300+ 學員喺留學考試中快速提升能力同自信。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大學碩士',
+                'team.sylvia.desc': '深耕留學申請，熟悉英美澳港多國院校體系，累計幫學生攞到 100+ 份世界名校 offer。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '美國 Top10 碩士 · 教研主管',
+                'team.ava.desc': '多年英語教學、師資培訓同課程設計經驗，覆蓋初高中英語、日常/商務英語、雅思同面試口語等全階段。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '帝國理工碩士 · 雅思 8.5',
+                'team.louise.desc': '3 年教學經驗，自成一套英本英碩教學體系，學員雅思通過率 98%，閱讀聽力滿分、口語 8 分。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '悉尼大學碩士',
+                'team.tiffany.desc': '金融同國際商務雙碩士，擅長將商業案例同學生個人規劃、行業需求同機構機會結合，幫學生打造實戰型競爭力。',
                 'team.join_title': '加入天才計劃',
                 'team.join_subtitle': '成為定義下一代精英教育嘅引領者',
                 'team.join_btn': '點擊掃碼咨詢',
