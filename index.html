@@ -1,871 +1,1251 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vienne | AI Studio</title>
+    <title>EliteBay - 留学·多语言培训·海外求职·商务英语一站式服务</title>
+    <link rel="icon" type="image/svg+xml" href="image/elitebay-logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        'space': '#000000',
-                        'space-deep': '#0a0a1a',
-                        'neon-cyan': '#00f3ff',
-                        'neon-blue': '#0066ff',
-                        'neon-purple': '#bf00ff',
-                        'neon-pink': '#ff00aa',
-                    },
-                    animation: {
-                        'spin-slow': 'spin 20s linear infinite',
-                        'spin-reverse': 'spin 25s linear infinite reverse',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        'pulse-glow': {
-                            '0%, 100%': { box-shadow: '0 0 20px rgba(0, 243, 255, 0.5)' },
-                            '50%': { box-shadow: '0 0 40px rgba(0, 243, 255, 0.8), 0 0 60px rgba(0, 243, 255, 0.4)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+        }
         body {
-            background: #000000;
-            color: #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            margin: 0;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+            font-size: 14px;
         }
-
-        /* 3D Space Container */
-        .space-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            perspective: 1000px;
-            overflow: hidden;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        .smooth-scroll {
+            scroll-behavior: smooth;
         }
-
-        /* Stars */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) ease-in-out infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Saturn Planet with Rings */
-        .saturn-system {
-            position: absolute;
-            top: 50%;
-            right: -200px;
-            transform: translateY(-50%);
-            width: 600px;
-            height: 600px;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .planet {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #8b4513 100%);
-            box-shadow: 
-                inset -30px -30px 60px rgba(0,0,0,0.8),
-                0 0 50px rgba(255, 140, 0, 0.6),
-                0 0 100px rgba(255, 140, 0, 0.3);
-            animation: rotate-planet 30s linear infinite;
-            z-index: 2;
-        }
-
-        .planet::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50%;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
-            animation: rotate-planet 30s linear infinite reverse;
-        }
-
-        @keyframes rotate-planet {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Saturn Rings */
-        .ring-system {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateX(75deg);
-            width: 600px;
-            height: 600px;
-            z-index: 3;
-            animation: rotate-rings 40s linear infinite;
-        }
-
-        .ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 20px solid transparent;
-            border-top-color: rgba(255, 200, 100, 0.6);
-            border-right-color: rgba(255, 180, 80, 0.4);
-            box-shadow: 
-                0 0 20px rgba(255, 200, 100, 0.5),
-                inset 0 0 20px rgba(255, 200, 100, 0.3);
-        }
-
-        .ring:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            border-width: 30px;
-            animation: rotate-ring 20s linear infinite;
-        }
-
-        .ring:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            border-width: 25px;
-            border-color: rgba(255, 220, 150, 0.5);
-            animation: rotate-ring 25s linear infinite reverse;
-        }
-
-        .ring:nth-child(3) {
-            width: 550px;
-            height: 550px;
-            border-width: 15px;
-            border-color: rgba(200, 150, 100, 0.3);
-            animation: rotate-ring 35s linear infinite;
-        }
-
-        @keyframes rotate-rings {
-            from { transform: translate(-50%, -50%) rotateX(75deg) rotateY(0deg); }
-            to { transform: translate(-50%, -50%) rotateX(75deg) rotateY(360deg); }
-        }
-
-        @keyframes rotate-ring {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Secondary Planet */
-        .neptune {
-            position: absolute;
-            bottom: 10%;
-            left: 10%;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0066ff 0%, #001133 100%);
-            box-shadow: 
-                0 0 30px rgba(0, 102, 255, 0.6),
-                inset -20px -20px 40px rgba(0,0,0,0.8);
-            animation: float 10s ease-in-out infinite, rotate-planet 20s linear infinite;
-            z-index: 1;
-        }
-
-        /* Asteroid Belt */
-        .asteroid-belt {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            border: 2px dashed rgba(255, 255, 255, 0.1);
-            animation: spin 60s linear infinite;
-        }
-
-        .asteroid {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Shooting Star */
-        .shooting-star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #00f3ff, transparent);
-            border-radius: 50%;
-            box-shadow: 0 0 20px #00f3ff;
-            animation: shoot 3s linear infinite;
+        .fade-in {
             opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.5s ease-out;
         }
-
-        @keyframes shoot {
-            0% {
-                transform: translateX(0) translateY(0) rotate(-45deg) scale(0);
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(500px) translateY(500px) rotate(-45deg) scale(1);
-                opacity: 0;
-            }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 1.5px solid #e5e7eb;
+        }
+        .nav-blur {
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: rgba(255,255,255,0.9);
         }
-        
-        .glass:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 243, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-
-        /* Neon Text Effects */
-        .neon-text {
-            text-shadow: 
-                0 0 10px rgba(0, 243, 255, 0.8),
-                0 0 20px rgba(0, 243, 255, 0.5),
-                0 0 30px rgba(0, 243, 255, 0.3);
+        .modal.active {
+            display: flex;
         }
-        
-        .neon-purple {
-            text-shadow: 
-                0 0 10px rgba(191, 0, 255, 0.8),
-                0 0 20px rgba(191, 0, 255, 0.5),
-                0 0 30px rgba(191, 0, 255, 0.3);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1a1a2e;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f3ff;
-        }
-
-        /* Orbit Animation for Profile */
-        .orbit-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            perspective: 1000px;
-        }
-
-        .profile-orbit {
-            position: absolute;
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 360px;
             width: 100%;
-            height: 100%;
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
-            transform-style: preserve-3d;
+            text-align: center;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-
-        .orbit-particle {
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background: #00f3ff;
-            border-radius: 50%;
-            box-shadow: 0 0 20px #00f3ff;
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+            background: white;
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .qr-codes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .qr-code-item {
+            text-align: center;
+        }
+        .qr-code-item .qr-code {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="smooth-scroll">
 
-    <!-- 3D Universe Background -->
-    <div class="space-container" id="universe">
-        <div class="stars" id="starfield"></div>
-        
-        <!-- Saturn System (Big Ringed Planet) -->
-        <div class="saturn-system">
-            <div class="planet"></div>
-            <div class="ring-system">
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
+    <!-- QR Code Modal：企业微信 + 个人微信 -->
+    <div id="qrModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content max-w-md" onclick="event.stopPropagation()">
+            <h3 class="text-[18px] font-semibold text-gray-900 mb-2">扫码加入天才计划</h3>
+            <p class="text-[13px] text-gray-600 mb-1">微信号：<strong>Vienne71</strong></p>
+            <p class="text-[13px] text-gray-500 mb-4">添加微信咨询详情，成为定义下一代精英教育的引领者</p>
+            <div class="qr-codes-grid">
+                <div class="qr-code-item">
+                    <div class="qr-code">
+                        <img src="image/wechat-enterprise.png" alt="企业微信二维码" class="w-full h-full object-contain rounded-lg">
+                    </div>
+                    <p class="text-[13px] font-medium text-gray-700 mt-2">企业微信</p>
+                </div>
+                <div class="qr-code-item">
+                    <div class="qr-code">
+                        <img src="image/wechat-personal.png" alt="个人微信二维码" class="w-full h-full object-contain rounded-lg">
+                    </div>
+                    <p class="text-[13px] font-medium text-gray-700 mt-2">个人微信</p>
+                </div>
             </div>
+            <p class="text-[12px] text-gray-500 mt-4 mb-2">或留下信息，我们会联系您</p>
+            <form id="contactForm" class="space-y-3 text-left" onsubmit="return submitContactForm(event)">
+                <input type="text" name="name" placeholder="姓名" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent" required>
+                <input type="tel" name="phone" placeholder="电话" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent" required>
+                <div>
+                    <p class="text-[12px] text-gray-600 mb-1.5">1. 需求（可多选）</p>
+                    <div class="flex flex-wrap gap-2">
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="商务英语" class="rounded border-gray-300"> 商务英语</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="雅思托福" class="rounded border-gray-300"> 雅思托福</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="留学申请" class="rounded border-gray-300"> 留学申请</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="家教陪伴师" class="rounded border-gray-300"> 家教陪伴师</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="少儿英语" class="rounded border-gray-300"> 少儿英语</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="国际课程" class="rounded border-gray-300"> 国际课程</label>
+                        <label class="inline-flex items-center gap-1.5 text-[13px] cursor-pointer"><input type="checkbox" name="需求" value="公立学校课程" class="rounded border-gray-300"> 公立学校课程</label>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[12px] text-gray-600 mb-1">2. 城市</p>
+                    <input type="text" name="城市" placeholder="例如：北京、上海" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                </div>
+                <div>
+                    <p class="text-[12px] text-gray-600 mb-1">3. 上课方式</p>
+                    <select name="线上线下" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white">
+                        <option value="">请选择</option>
+                        <option value="线上">线上</option>
+                        <option value="线下">线下</option>
+                        <option value="均可">均可</option>
+                    </select>
+                </div>
+                <input type="text" name="备注" placeholder="备注（选填）" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+                <button type="submit" class="w-full py-2.5 bg-gray-800 text-white rounded-full text-[13px] font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    提交
+                </button>
+            </form>
+            <button onclick="closeModal()" class="w-full py-3 mt-2 border border-gray-200 text-gray-600 rounded-full text-[14px] font-medium hover:bg-gray-50 transition-colors">
+                关闭
+            </button>
         </div>
-
-        <!-- Secondary Planet -->
-        <div class="neptune"></div>
-
-        <!-- Asteroid Belt -->
-        <div class="asteroid-belt" id="asteroidBelt"></div>
-
-        <!-- Shooting Stars -->
-        <div class="shooting-star" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
-        <div class="shooting-star" style="top: 60%; left: 10%; animation-delay: 1.5s;"></div>
-        <div class="shooting-star" style="top: 40%; left: 60%; animation-delay: 3s;"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center shadow-[0_0_20px_rgba(0,243,255,0.5)] animate-pulse-glow overflow-hidden">
-                    <img src="images/bella.png" alt="Bella Logo" class="w-full h-full object-cover">
+    <nav class="fixed w-full nav-blur z-50 border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <img src="image/elitebay-logo.svg" alt="EliteBay" class="h-10 w-auto object-contain">
+                    <span class="text-lg font-semibold tracking-tight text-gray-900" data-i18n-key="nav.brand">EliteBay</span>
                 </div>
-                <span class="font-bold text-xl tracking-wider neon-text">Vienne.AI</span>
+                <div class="hidden md:flex items-center gap-6 text-[13px]">
+                    <!-- 语言切换 -->
+                    <div class="flex items-center gap-1 text-gray-500 text-[12px]">
+                        <button type="button" class="lang-btn font-medium text-gray-900" data-lang="zh" onclick="setLang('zh')">中</button>
+                        <span>|</span>
+                        <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                        <span>|</span>
+                        <button type="button" class="lang-btn" data-lang="ja" onclick="setLang('ja')">日</button>
+                        <span>|</span>
+                        <button type="button" class="lang-btn" data-lang="ko" onclick="setLang('ko')">韩</button>
+                        <span>|</span>
+                        <button type="button" class="lang-btn" data-lang="yue" onclick="setLang('yue')">粵</button>
+                    </div>
+                    <!-- 主导航 -->
+                    <a href="#about" class="text-gray-600 hover:text-gray-900 transition-colors" data-i18n-key="nav.about">关于</a>
+                    <a href="#services" class="text-gray-600 hover:text-gray-900 transition-colors" data-i18n-key="nav.services">服务</a>
+                    <a href="#ai" class="text-gray-600 hover:text-gray-900 transition-colors" data-i18n-key="nav.ai">AI+教育</a>
+                    <a href="#team" class="text-gray-600 hover:text-gray-900 transition-colors" data-i18n-key="nav.team">团队</a>
+                    <a href="#contact" class="px-4 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors text-[13px]" data-i18n-key="nav.contact">联系我们</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
-            
-            <div class="hidden md:flex gap-8 font-medium text-sm text-gray-400">
-                <a href="#about" class="hover:text-neon-cyan transition-colors duration-300">关于</a>
-                <a href="notes.html" class="hover:text-neon-cyan transition-colors duration-300 text-neon-cyan">学习笔记</a>
-                <a href="#projects" class="hover:text-neon-cyan transition-colors duration-300">项目</a>
-                <a href="#contact" class="hover:text-neon-cyan transition-colors duration-300">联系</a>
-            </div>
-
-            <button onclick="toggleChat()" class="px-6 py-2 rounded-full glass border border-neon-cyan/50 text-neon-cyan text-sm font-medium hover:bg-neon-cyan/10 transition-all shadow-[0_0_15px_rgba(0,243,255,0.3)]">
-                <span class="inline-block w-2 h-2 bg-neon-cyan rounded-full mr-2 animate-pulse"></span>
-                AI 分身
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="about" class="pt-32 pb-20 px-6 relative min-h-screen flex items-center">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            
-            <!-- Left Content -->
-            <div class="space-y-8">
-                <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full border border-neon-cyan/30 text-neon-cyan text-sm">
-                    <span class="w-2 h-2 bg-neon-cyan rounded-full animate-pulse"></span>
-                    AI 产品落地实践者·工程师
-                </div>
-
-                <h1 class="text-6xl md:text-8xl font-black leading-none">
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">VIENNE</span>
+    <section class="relative overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-24">
+        <!-- Hero background image -->
+        <img src="image/gra.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none">
+        <div class="relative max-w-5xl mx-auto px-6">
+            <div class="max-w-2xl fade-in">
+                <h1 class="text-[32px] lg:text-[40px] leading-tight font-serif-sc font-medium text-gray-900 mb-4 tracking-tight" data-i18n-key="hero.title">
+                    为孩子提供 <em class="not-italic text-blue-900">顶级</em> 学习陪伴体验
                 </h1>
-
-                <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-2 rounded-full glass text-neon-cyan border border-neon-cyan/30 text-sm font-bold">AI Agent</span>
-                    <span class="px-4 py-2 rounded-full glass text-neon-purple border border-neon-purple/30 text-sm font-bold">LangChain</span>
-                    <span class="px-4 py-2 rounded-full glass text-neon-pink border border-neon-pink/30 text-sm font-bold">全栈落地</span>
-                    <span class="px-4 py-2 rounded-full glass text-blue-400 border border-blue-400/30 text-sm font-bold">工程化思维</span>
+                <p class="text-[15px] text-gray-600 mb-8 leading-relaxed max-w-xl" data-i18n-key="hero.subtitle">
+                    我们团队来自 QS 全球前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。
+                </p>
+                
+                <div class="flex flex-wrap gap-3 mb-10">
+                    <button type="button" onclick="openModal()" class="px-6 py-2.5 bg-gray-900 text-white rounded-full text-[13px] font-medium hover:bg-gray-800 transition-all" data-i18n-key="hero.cta.primary">
+                        预约免费咨询
+                    </button>
                 </div>
 
-                <div class="space-y-4 text-gray-400 leading-relaxed border-l-2 border-neon-cyan/50 pl-6">
-                    <p>
-                        持有<strong class="text-white">香港大学硕士</strong>及<strong class="text-white">中南财经政法大学学士学位</strong>，
-                        曾任职<strong class="text-white">意法半导体</strong>、<strong class="text-white">UL香港</strong>、<strong class="text-white">京科</strong>，
-                        历任IC测试工程师、项目工程师、AI产品负责人。
-                    </p>
-                    <p>
-                        具备<strong class="text-white">跨时区多团队项目管理</strong>能力，精通<strong class="text-white">8D/FMEA/六西格玛</strong>工程化方法；
-                        雅思7分、粤语熟练。主导AI教育对话Agent等多款产品从0到1闭环落地，深耕<strong class="text-neon-cyan">LangChain/LangGraph</strong>、
-                        <strong class="text-neon-purple">RAG</strong>、<strong class="text-neon-pink">Prompt工程</strong>等技术。
-                    </p>
-                    <p>
-                        熟练运用OpenClaw、Cursor、Dify、Coze、火山方舟等AI工具，覆盖AI产品需求分析、系统设计、商业变现全链路。
-                        目前聚焦<strong class="text-white">AI Agent产品落地与优化</strong>，主攻<strong class="text-white">AI教育/内容创作</strong>赛道。
+                <div class="flex items-center gap-5 text-[12px] text-gray-500">
+                    <span class="flex items-center gap-1.5" data-i18n-key="hero.tag1">
+                        <span class="w-1 h-1 bg-green-500 rounded-full"></span>
+                        雅思保分计划
+                    </span>
+                    <span class="flex items-center gap-1.5" data-i18n-key="hero.tag2">
+                        <span class="w-1 h-1 bg-green-500 rounded-full"></span>
+                        名校申请指导
+                    </span>
+                    <span class="flex items-center gap-1.5" data-i18n-key="hero.tag3">
+                        <span class="w-1 h-1 bg-green-500 rounded-full"></span>
+                        海外求职陪跑
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-6 text-center fade-in">
+            <svg class="w-8 h-8 text-gray-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            <blockquote class="text-[22px] lg:text-[26px] leading-snug font-serif-sc font-medium text-gray-900 mb-6" data-i18n-key="quote.text">
+                孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求，让他的学习状态完全改观。
+            </blockquote>
+            <p class="text-[13px] text-gray-500" data-i18n-key="quote.caption">— 现在他每天都期待和你们上课</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-16" id="about">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto mb-12 fade-in">
+                <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900 mb-3" data-i18n-key="about.title">
+                    看到真正的 <em class="not-italic text-blue-900">专业陪伴</em> 在发生
+                </h2>
+                <p class="text-[15px] text-gray-600 leading-relaxed" data-i18n-key="about.subtitle">
+                    我们以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100">
+                    <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-blue-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="text-[16px] font-semibold mb-2 text-gray-900" data-i18n-key="about.mission.title">我们的使命</h3>
+                    <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="about.mission.desc">
+                        以 AI、心理、脑科学为核，重构教育范式。唤醒孩子天赋，领航菁英成长，让每个孩子都具备改变世界的潜能。
                     </p>
                 </div>
 
-                <div class="flex gap-4 pt-4">
-                    <a href="notes.html" class="group px-8 py-4 rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue text-white font-bold drop-shadow-[0_0_6px_rgba(0,0,0,0.8)] hover:shadow-[0_0_30px_rgba(0,243,255,0.5)] transition-all hover:scale-105 flex items-center gap-2">
-                        <span>🚀</span>
-                        学习笔记
-                    </a>
-                    <a href="#projects" class="px-8 py-4 rounded-full glass border border-white/20 text-white font-medium hover:border-neon-cyan/50 transition-all hover:shadow-[0_0_20px_rgba(0,243,255,0.3)]">
-                        查看项目
-                    </a>
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100" style="transition-delay: 0.1s;">
+                    <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-blue-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <h3 class="text-[16px] font-semibold mb-2 text-gray-900" data-i18n-key="about.vision.title">我们的愿景</h3>
+                    <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="about.vision.desc">
+                        成为定义下一代精英教育的引领者。让每个孩子精准激活潜能，成长为兼具硬核能力与独立人格的未来领航者。
+                    </p>
                 </div>
 
-                <div class="flex gap-4 text-xs text-gray-500 font-mono pt-2">
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>雅思7分</span>
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>粤语熟练</span>
-                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full"></span>跨时区协作</span>
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100" style="transition-delay: 0.2s;">
+                    <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-blue-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                    <h3 class="text-[16px] font-semibold mb-2 text-gray-900" data-i18n-key="about.talent.title">我们的人才观</h3>
+                    <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="about.talent.desc">
+                        聚专业同路人：既懂 AI、心理、脑科学的教育落地逻辑，兼具教育行业资深实操经验或国际视野。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 bg-white" id="services">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto mb-12 fade-in">
+                <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900 mb-3" data-i18n-key="services.title">
+                    为每位学生 <em class="not-italic text-blue-900">量身打造</em> 的学习方案
+                </h2>
+                <p class="text-[15px] text-gray-600 leading-relaxed" data-i18n-key="services.subtitle">
+                    无论是需要系统性的长期陪伴，还是短期学习提升，我们都会根据孩子的性格、基础与目标制定最适合的学习方案。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="service-card fade-in">
+                    <div class="icon-circle">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                    </div>
+                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card1.title">国际学校学业陪伴</h3>
+                    <p class="text-[12px] text-gray-600 leading-relaxed" data-i18n-key="services.card1.desc">教研团队来自 QS 前 15 藤校，教授的不止于知识，更在于终身学习的方法和思维能力。</p>
+                </div>
+
+                <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                    <div class="icon-circle">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card2.title">AI + 语言培训</h3>
+                    <p class="text-[12px] text-gray-600 leading-relaxed" data-i18n-key="services.card2.desc">AI 对话测试词汇量、口语对练，配备大量题库，按真实场景制定合理且能坚持的学习计划。</p>
+                </div>
+
+                <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                    <div class="icon-circle">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card3.title">留学申请 + 求职陪跑</h3>
+                    <p class="text-[12px] text-gray-600 leading-relaxed" data-i18n-key="services.card3.desc">从语言到留学到研学校友圈打通到求职辅导形成一站式闭环，链接海外企业资源。</p>
+                </div>
+
+                <div class="service-card fade-in" style="transition-delay: 0.3s;">
+                    <div class="icon-circle">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-[15px] font-semibold mb-1.5 text-gray-900" data-i18n-key="services.card4.title">全球研学团</h3>
+                    <p class="text-[12px] text-gray-600 leading-relaxed" data-i18n-key="services.card4.desc">拓宽视野拓展海外校友圈，研学团遍布全球高校，让学生在研学中突破校友圈形成海外校友联盟。</p>
                 </div>
             </div>
 
-            <!-- Right: 3D Profile with Orbit -->
-            <div class="flex justify-center items-center">
-                <div class="orbit-container">
-                    <div class="profile-orbit">
-                        <div class="orbit-particle"></div>
+            <!-- Detailed Services -->
+            <div class="bg-gray-50 rounded-2xl p-6 lg:p-10 fade-in">
+                <h3 class="text-[20px] font-serif-sc font-medium text-center mb-10 text-gray-900" data-i18n-key="services.custom_title">定制属于孩子的个性化学习服务</h3>
+                
+                <div class="space-y-0 divide-y divide-gray-200">
+                    <div class="py-6 flex items-start gap-4 group cursor-pointer">
+                        <div class="icon-circle flex-shrink-0 w-12 h-12 group-hover:border-blue-900 transition-colors">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                        </div>
+                        <div class="flex-1 pt-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-[15px] font-semibold text-gray-900" data-i18n-key="services.d1.title">学习诊断评估</h4>
+                                <span class="text-gray-400 group-hover:text-blue-900 transition-colors text-[13px]">→</span>
+                            </div>
+                            <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="services.d1.desc">通过专业评估工具全面了解孩子的学科基础、学习习惯与思维特点，为后续学习制定精准方向。</p>
+                        </div>
                     </div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="relative w-64 h-64 rounded-full overflow-hidden border-2 border-neon-cyan/50 shadow-[0_0_50px_rgba(0,243,255,0.3)] animate-float">
-                            <img src="images/vienne.png" 
-                                 alt="Vienne Profile" 
-                                 class="w-full h-full object-cover opacity-90">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                            <div class="absolute bottom-4 left-0 right-0 text-center">
-                                <p class="text-neon-cyan text-xs font-mono">SYSTEM ONLINE</p>
-                                <p class="text-white font-bold">Vienne</p>
+
+                    <div class="py-6 flex items-start gap-4 group cursor-pointer">
+                        <div class="icon-circle flex-shrink-0 w-12 h-12 group-hover:border-blue-900 transition-colors">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        </div>
+                        <div class="flex-1 pt-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-[15px] font-semibold text-gray-900" data-i18n-key="services.d2.title">学科专项提升（阅读/写作/数学）</h4>
+                                <span class="text-gray-400 group-hover:text-blue-900 transition-colors text-[13px]">→</span>
+                            </div>
+                            <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="services.d2.desc">针对薄弱学科进行系统强化训练，通过讲解、练习与反馈帮助孩子快速补齐短板。</p>
+                        </div>
+                    </div>
+
+                    <div class="py-6 flex items-start gap-4 group cursor-pointer">
+                        <div class="icon-circle flex-shrink-0 w-12 h-12 group-hover:border-blue-900 transition-colors">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                        </div>
+                        <div class="flex-1 pt-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-[15px] font-semibold text-gray-900" data-i18n-key="services.d3.title">表达能力训练（口语/演讲）</h4>
+                                <span class="text-gray-400 group-hover:text-blue-900 transition-colors text-[13px]">→</span>
+                            </div>
+                            <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="services.d3.desc">提升孩子的表达自信与逻辑结构能力，适用于国际学校课堂讨论与展示。</p>
+                        </div>
+                    </div>
+
+                    <div class="py-6 flex items-start gap-4 group cursor-pointer">
+                        <div class="icon-circle flex-shrink-0 w-12 h-12 group-hover:border-blue-900 transition-colors">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div class="flex-1 pt-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-[15px] font-semibold text-gray-900" data-i18n-key="services.d4.title">学习习惯养成</h4>
+                                <span class="text-gray-400 group-hover:text-blue-900 transition-colors text-[13px]">→</span>
+                            </div>
+                            <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="services.d4.desc">帮助孩子建立专注力、时间管理、任务拆解等关键学习习惯，实现自主高效学习。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Education -->
+    <section class="py-16" id="ai">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+                <div class="fade-in">
+                    <span class="text-[12px] font-medium text-blue-900 bg-blue-50 px-3 py-1.5 rounded-full mb-5 inline-block" data-i18n-key="ai.badge">智能化教学</span>
+                    <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900 mb-4" data-i18n-key="ai.title">
+                        AI + 教育，<em class="not-italic text-blue-900">重新定义</em> 学习体验
+                    </h2>
+                    <p class="text-[15px] text-gray-600 mb-6 leading-relaxed" data-i18n-key="ai.subtitle">
+                        通过多年教学经验老师输入知识库与教研知识；融入陪伴式教学数字人，配合真人老师实现真正意义上动态 1V1 私人学业订制。
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white flex-shrink-0 text-[11px] font-bold">1</div>
+                            <div>
+                                <h4 class="text-[14px] font-semibold text-gray-900 mb-0.5" data-i18n-key="ai.item1.title">AdmitScope 智能择校</h4>
+                                <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="ai.item1.desc">3分钟算出你的梦校成功率，通过 AI 技术根据学生性格与职业测试指定专属学院的专业，并提供录取成功率报告。</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white flex-shrink-0 text-[11px] font-bold">2</div>
+                            <div>
+                                <h4 class="text-[14px] font-semibold text-gray-900 mb-0.5" data-i18n-key="ai.item2.title">AI 雅思学习</h4>
+                                <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="ai.item2.desc">词汇量检测；AI 口语对练，并形成总结报告与复盘笔记；配备大量题库，按真实场景制定合理且能坚持的学生每日学习计划。</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white flex-shrink-0 text-[11px] font-bold">3</div>
+                            <div>
+                                <h4 class="text-[14px] font-semibold text-gray-900 mb-0.5" data-i18n-key="ai.item3.title">AI 测评与 AI 老师带学</h4>
+                                <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="ai.item3.desc">真正的短期高效提分，告别模板化教学。学不会？没兴趣？趣味驱动，让你爱上学习，教到会为止！</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="fade-in" style="transition-delay: 0.2s;">
+                    <div class="relative bg-gray-100 rounded-2xl p-8 aspect-square flex items-center justify-center overflow-hidden">
+                        <!-- Right card background image -->
+                        <img src="image/bella.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none select-none">
+                        <div class="relative text-center">
+                            <div class="w-24 h-24 bg-white/50 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
+                                <svg class="w-12 h-12 text-blue-900/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <p class="text-white/80 text-[14px]" data-i18n-key="ai.side1">海外学习-生活-工作全链陪伴</p>
+                            <p class="text-white/80 text-[12px] mt-1" data-i18n-key="ai.side2">依托团队自身大量资源链接海外企业资源</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Learning Hub Section -->
-    <section id="learning" class="py-24 px-6 relative">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <p class="text-neon-cyan font-mono text-sm mb-2">// KNOWLEDGE_BASE</p>
-                <h2 class="text-4xl md:text-6xl font-black text-white mb-4">
-                    AI Agent <span class="neon-purple">学习笔记</span>
+    <!-- Team Section -->
+    <section class="py-16 bg-white" id="team">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto mb-12 fade-in">
+                <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900 mb-3" data-i18n-key="team.title">
+                    来自 <em class="not-italic text-blue-900">顶尖名校</em> 的导师团队
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    沉淀AI产品设计、大模型实操、工程化方法等方向学习笔记，持续探索大模型应用与商业化路径
+                <p class="text-[15px] text-gray-600 leading-relaxed" data-i18n-key="team.subtitle">
+                    TQS TOP 15 海外硕博，专注提升学生学习内驱力、专注力，帮助学生培养终生受用的学习系统。
                 </p>
             </div>
 
-            <!-- Filter Buttons -->
-            <div class="flex justify-center flex-wrap gap-3 mb-12">
-                <button onclick="filterNotes('all')" class="filter-btn active px-6 py-2 rounded-full border border-neon-cyan bg-neon-cyan/10 text-neon-cyan text-sm font-medium transition-all hover:shadow-[0_0_20px_rgba(0,243,255,0.3)]">全部</button>
-                <button onclick="filterNotes('langchain')" class="filter-btn px-6 py-2 rounded-full border border-white/20 text-gray-400 text-sm font-medium transition-all hover:border-neon-purple hover:text-neon-purple hover:shadow-[0_0_20px_rgba(191,0,255,0.3)]">LangChain</button>
-                <button onclick="filterNotes('rag')" class="filter-btn px-6 py-2 rounded-full border border-white/20 text-gray-400 text-sm font-medium transition-all hover:border-neon-pink hover:text-neon-pink hover:shadow-[0_0_20px_rgba(255,0,170,0.3)]">RAG</button>
-                <button onclick="filterNotes('product')" class="filter-btn px-6 py-2 rounded-full border border-white/20 text-gray-400 text-sm font-medium transition-all hover:border-blue-400 hover:text-blue-400">产品设计</button>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-6">
-                <!-- Article 1 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-neon-cyan/50 transition-all duration-300 group" data-category="langchain">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-xs font-mono">LangChain</span>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="group fade-in">
+                    <div class="bg-gray-50 rounded-2xl p-6 h-full transition-all group-hover:bg-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">V</div>
+                            <div>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.vienne.name">Vienne</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.vienne.role">香港大学硕士</p>
+                            </div>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2026-02-15</span>
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.vienne.desc">
+                            依托2年国际教育教学经验心得制定陪伴式教学SOP，至今已成功助力300+学员留学考试中快速提升能力与自信。
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon-cyan transition-colors">
-                        LangGraph构建多轮对话Agent实战
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        基于StateGraph实现教育场景下的连贯教学逻辑与长期记忆能力，解决AI教师上下文理解问题。
-                    </p>
-                    <div class="bg-black/30 rounded-lg p-3 mb-4 border border-white/10 font-mono text-xs text-gray-300 overflow-x-auto">
-                        <span class="text-neon-purple">from</span> langgraph <span class="text-neon-purple">import</span> StateGraph, END
-                    </div>
-                    <button class="text-neon-cyan text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
 
-                <!-- Article 2 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-neon-pink/50 transition-all duration-300 group" data-category="rag">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-neon-pink/10 border border-neon-pink/30 text-neon-pink text-xs font-mono">RAG</span>
+                <div class="group fade-in" style="transition-delay: 0.1s;">
+                    <div class="bg-gray-50 rounded-2xl p-6 h-full transition-all group-hover:bg-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-indigo-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">S</div>
+                            <div>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.sylvia.name">Syvlia</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.sylvia.role">香港城市大学硕士</p>
+                            </div>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2026-01-28</span>
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.sylvia.desc">
+                            深耕留学申请，熟悉英美澳港多国院校体系，累计指导同学斩获100+份世界名校offer。
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon-pink transition-colors">
-                        教育场景RAG优化：召回率15%→85%
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        向量数据库选型、文本分块策略、重排序层优化，解决大模型幻觉问题提升知识准确性。
-                    </p>
-                    <button class="text-neon-pink text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
 
-                <!-- Article 3 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-blue-400/50 transition-all duration-300 group" data-category="product">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-blue-400/10 border border-blue-400/30 text-blue-400 text-xs font-mono">产品设计</span>
+                <div class="group fade-in" style="transition-delay: 0.2s;">
+                    <div class="bg-gray-50 rounded-2xl p-6 h-full transition-all group-hover:bg-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-purple-900 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">A</div>
+                            <div>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.ava.name">Ava</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.ava.role">美国Top10硕士 · 教研主管</p>
+                            </div>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2026-01-10</span>
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.ava.desc">
+                            深耕英语教学、师资培训与课程设计多年，覆盖初高中英语、日常/商务/雅思/面试口语全学段。
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                        8D方法论在AI产品中的应用
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        将半导体行业的8D/FMEA工程化方法应用于AI Agent产品迭代，构建稳健的质量管控体系。
-                    </p>
-                    <button class="text-blue-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
 
-                <!-- Article 4 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-neon-purple/50 transition-all duration-300 group" data-category="langchain">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-neon-purple/10 border border-neon-purple/30 text-neon-purple text-xs font-mono">Prompt工程</span>
+                <div class="group fade-in">
+                    <div class="bg-gray-50 rounded-2xl p-6 h-full transition-all group-hover:bg-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-teal-800 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">L</div>
+                            <div>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.louise.name">Louise</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.louise.role">帝国理工硕士 · 雅思8.5</p>
+                            </div>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2025-12-20</span>
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.louise.desc">
+                            3年教学经验，英本英硕独特教学体系，学员雅思通过率98%，阅读听力满分口语8分。
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon-purple transition-colors">
-                        Cursor+Dify快速交付AI产品MVP
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        Vibe Coding实战：利用Cursor与Dify协作，从需求到上线48小时完成AI内容创作Agent。
-                    </p>
-                    <button class="text-neon-purple text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
 
-                <!-- Article 5 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-neon-cyan/50 transition-all duration-300 group" data-category="product">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan text-xs font-mono">商业化</span>
+                <div class="group fade-in" style="transition-delay: 0.1s;">
+                    <div class="bg-gray-50 rounded-2xl p-6 h-full transition-all group-hover:bg-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-rose-800 rounded-full flex items-center justify-center text-white text-[14px] font-serif-sc">T</div>
+                            <div>
+                                <h3 class="text-[15px] font-semibold text-gray-900" data-i18n-key="team.tiffany.name">Tiffany</h3>
+                                <p class="text-[12px] text-gray-500" data-i18n-key="team.tiffany.role">悉尼大学硕士</p>
+                            </div>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2025-12-05</span>
+                        <p class="text-[13px] text-gray-600 leading-relaxed" data-i18n-key="team.tiffany.desc">
+                            金融和国际商务双硕士，擅长跨国企业课程以及市场营销，HD机构4年经验。
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon-cyan transition-colors">
-                        AI教育产品商业化路径探索
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        从获客成本到付费转化，分析AI教育Agent的商业模式设计与变现策略。
-                    </p>
-                    <button class="text-neon-cyan text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
 
-                <!-- Article 6 -->
-                <article class="note-card glass p-6 rounded-2xl hover:border-neon-pink/50 transition-all duration-300 group" data-category="rag">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-neon-pink/10 border border-neon-pink/30 text-neon-pink text-xs font-mono">多模态</span>
+                <!-- Join Us Card - Click to show QR -->
+                <div class="group fade-in cursor-pointer" style="transition-delay: 0.2s;" onclick="openModal()">
+                    <div class="bg-gray-900 rounded-2xl p-6 h-full text-white flex flex-col justify-center items-center text-center hover:bg-gray-800 transition-all">
+                        <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-3 group-hover:bg-white/20 transition-all">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                         </div>
-                        <span class="text-xs text-gray-500 font-mono">2025-11-28</span>
+                        <h3 class="text-[15px] font-semibold mb-1" data-i18n-key="team.join_title">加入天才计划</h3>
+                        <p class="text-[12px] text-gray-400 mb-3" data-i18n-key="team.join_subtitle">成为定义下一代精英教育的引领者</p>
+                        <span class="text-[11px] text-gray-500 border-b border-gray-600 pb-0.5 group-hover:text-white group-hover:border-white transition-all" data-i18n-key="team.join_btn">点击扫码咨询</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon-pink transition-colors">
-                        ASR/TTS集成实现全语音交互
-                    </h3>
-                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                        火山方舟与Azure语音服务对比，低延迟实时语音对话技术实现细节。
-                    </p>
-                    <button class="text-neon-pink text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                        阅读全文 →
-                    </button>
-                </article>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-neon-cyan font-mono text-sm mb-2">// PORTFOLIO</p>
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
-                    实战<span class="text-neon-cyan neon-text">项目</span>
+    <!-- Testimonials -->
+    <section class="py-16">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-[26px] lg:text-[30px] leading-tight font-serif-sc font-medium text-gray-900" data-i18n-key="testimonials.title">
+                    家长们这样 <em class="not-italic text-blue-900">评价</em> 我们的陪伴服务
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    机器学习、工程系统、AI产品类实战项目，覆盖AI教育、内容创作等赛道
-                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100">
+                    <div class="flex gap-0.5 mb-4">
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4 text-[13px] leading-relaxed" data-i18n-key="testimonials.t1.text">
+                        孩子学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="text-[12px] font-medium text-gray-900" data-i18n-key="testimonials.t1.name">李女士</p>
+                            <p class="text-[11px] text-gray-500" data-i18n-key="testimonials.t1.role">国际学校家长</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100" style="transition-delay: 0.1s;">
+                    <div class="flex gap-0.5 mb-4">
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4 text-[13px] leading-relaxed" data-i18n-key="testimonials.t2.text">
+                        孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求。
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="text-[12px] font-medium text-gray-900" data-i18n-key="testimonials.t2.name">王先生</p>
+                            <p class="text-[11px] text-gray-500" data-i18n-key="testimonials.t2.role">雅思学员家长</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 fade-in border border-gray-100" style="transition-delay: 0.2s;">
+                    <div class="flex gap-0.5 mb-4">
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3.5 h-3.5 text-gray-900" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-700 mb-4 text-[13px] leading-relaxed" data-i18n-key="testimonials.t3.text">
+                        孩子基础比较薄弱，你们帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <p class="text-[12px] font-medium text-gray-900" data-i18n-key="testimonials.t3.name">张女士</p>
+                            <p class="text-[11px] text-gray-500" data-i18n-key="testimonials.t3.role">美本申请家长</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gray-900 text-white" id="contact">
+        <div class="max-w-3xl mx-auto px-6 text-center fade-in">
+            <div class="w-16 h-20 mx-auto mb-6 flex items-center justify-center">
+                <img src="image/elitebay-logow.svg" alt="EliteBay" class="max-h-full max-w-full object-contain opacity-90">
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass rounded-3xl p-8 hover:border-neon-cyan/50 transition-all duration-300 group border border-white/10">
-                    <div class="w-14 h-14 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        🎙️
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">AI教育对话Agent</h3>
-                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                        基于LangGraph搭建多轮对话系统，集成ASR/TTS实现全语音交互。采用RAG技术构建教育知识库，
-                        结合发音纠正算法，知识召回准确率提升15%，覆盖从需求分析到商业变现全链路。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">LangGraph</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">RAG</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">ASR/TTS</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">商业变现</span>
-                    </div>
-                </div>
-
-                <div class="glass rounded-3xl p-8 hover:border-neon-purple/50 transition-all duration-300 group border border-white/10">
-                    <div class="w-14 h-14 rounded-2xl bg-neon-purple/10 border border-neon-purple/30 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        ✍️
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">AI自媒体创作Agent</h3>
-                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                        利用Dify+Coze搭建自动化内容创作工作流，实现从热点抓取、文案生成到多平台分发的全流程自动化。
-                        结合Cursor快速迭代前端界面，48小时完成MVP验证。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-purple text-xs border border-neon-purple/20">Dify</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-purple text-xs border border-neon-purple/20">Coze</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-purple text-xs border border-neon-purple/20">自动化</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-purple text-xs border border-neon-purple/20">MVP</span>
-                    </div>
-                </div>
-
-                <div class="glass rounded-3xl p-8 hover:border-green-400/50 transition-all duration-300 group border border-white/10">
-                    <div class="w-14 h-14 rounded-2xl bg-green-400/10 border border-green-400/30 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        🌀
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">台风图像预测模型</h3>
-                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                        香港大学毕业论文项目。设计SE-Unet+CDDPM架构，引入三元损失函数优化预测效果，
-                        在Google Colab完成模型训练与部署，图像核心特征清晰度大幅提升。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-green-400 text-xs border border-green-400/20">PyTorch</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-green-400 text-xs border border-green-400/20">Computer Vision</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-green-400 text-xs border border-green-400/20">Deep Learning</span>
-                    </div>
-                </div>
-
-                <div class="glass rounded-3xl p-8 hover:border-yellow-400/50 transition-all duration-300 group border border-white/10">
-                    <div class="w-14 h-14 rounded-2xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        🏭
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">STULT质量追踪系统</h3>
-                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                        意法半导体产线缺陷追踪平台，运用8D/六西格玛方法分析产线缺陷数据。
-                        实现缺陷率降低80%，97%人工记录自动化替代，跨区域协同全球制造基地。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-yellow-400 text-xs border border-yellow-400/20">六西格玛</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-yellow-400 text-xs border border-yellow-400/20">8D方法</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-yellow-400 text-xs border border-yellow-400/20">工业自动化</span>
-                    </div>
-                </div>
-
-                <!-- EliteBay 多语言精英教育官网 -->
-                <div class="glass rounded-3xl p-8 hover:border-neon-cyan/50 transition-all duration-300 group border border-white/10">
-                    <div class="w-14 h-14 rounded-2xl bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                        🌐
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">EliteBay 多语言精英教育官网</h3>
-                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
-                        为 EliteBay 打造的一站式精英教育官网，支持中/英/日/韩/粤多语言切换，覆盖语言培训、留学申请、海外求职等业务线。
-                        以高转化着陆页结构与信任感模块设计，聚焦家长与学生的咨询与留资转化。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">多语言站点</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">教育行业</span>
-                        <span class="px-3 py-1 rounded-full bg-white/5 text-neon-cyan text-xs border border-neon-cyan/20">Landing Page</span>
-                    </div>
-                    <a href="https://elitebay.study/" target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center gap-2 text-neon-cyan text-sm font-medium hover:gap-3 transition-all">
-                        访问线上网站
-                        <span>↗</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 relative">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-6xl font-black text-white mb-4">
-                Let's <span class="text-neon-cyan neon-text">Connect</span>
+            <h2 class="text-[24px] lg:text-[28px] leading-tight font-serif-sc font-medium mb-4" data-i18n-key="cta.title">
+                准备好开启孩子的 <em class="not-italic text-blue-400">精英教育</em> 之旅了吗？
             </h2>
-            <p class="text-gray-400 mb-12 text-lg">
-                无论是AI Agent技术交流，还是AI教育/内容创作赛道合作，欢迎随时联系
+            <p class="text-gray-400 text-[15px] mb-8 max-w-lg mx-auto leading-relaxed" data-i18n-key="cta.subtitle">
+                我们坚信每一个孩子都有潜力改变世界，我们的目标就是最大化发挥孩子自身优势。
             </p>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-12">
-                <!-- GitHub -->
-                <a href="https://github.com" target="_blank" class="glass p-6 rounded-2xl border border-white/10 hover:border-neon-cyan/50 hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-neon-cyan/10 transition-colors">
-                        <svg class="w-6 h-6 text-gray-400 group-hover:text-neon-cyan" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </div>
-                    <p class="text-sm font-medium text-gray-300 group-hover:text-white">GitHub</p>
-                </a>
-
-                <!-- LinkedIn -->
-                <a href="https://linkedin.com" target="_blank" class="glass p-6 rounded-2xl border border-white/10 hover:border-blue-500/50 hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
-                        <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </div>
-                    <p class="text-sm font-medium text-gray-300 group-hover:text-white">LinkedIn</p>
-                </a>
-
-                <!-- Phone -->
-                <a href="tel:13331522033" class="glass p-6 rounded-2xl border border-white/10 hover:border-green-500/50 hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-green-500/10 transition-colors">
-                        <svg class="w-6 h-6 text-gray-400 group-hover:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                        </svg>
-                    </div>
-                    <p class="text-sm font-medium text-gray-300 group-hover:text-white">电话</p>
-                    <p class="text-xs text-gray-500 mt-1 group-hover:text-green-400">13331522033</p>
-                </a>
-
-                <!-- WeChat -->
-                <div onclick="alert('微信号：13331522033')" class="glass p-6 rounded-2xl border border-white/10 hover:border-neon-pink/50 hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-neon-pink/10 transition-colors">
-                        <svg class="w-6 h-6 text-gray-400 group-hover:text-neon-pink" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 01-.023-.156.49.49 0 01.201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.269-.03-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.969-.982z"/>
-                        </svg>
-                    </div>
-                    <p class="text-sm font-medium text-gray-300 group-hover:text-white">微信</p>
-                    <p class="text-xs text-gray-500 mt-1 group-hover:text-neon-pink">13331522033</p>
-                </div>
+            
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+                <button type="button" onclick="openModal()" class="px-6 py-2.5 bg-white text-gray-900 rounded-full text-[13px] font-medium hover:bg-gray-100 transition-all" data-i18n-key="cta.btn1">
+                    预约免费咨询
+                </button>
             </div>
 
-            <!-- Email -->
-            <a href="mailto:yingnan24@yeah.net" class="inline-flex items-center gap-3 glass px-8 py-4 rounded-full border border-white/10 hover:border-neon-cyan/50 transition-all group">
-                <svg class="w-5 h-5 text-gray-400 group-hover:text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                <span class="text-gray-300 group-hover:text-white font-mono">yingnan24@yeah.net</span>
-            </a>
+            <div class="grid sm:grid-cols-3 gap-6 text-left max-w-lg mx-auto text-[13px]">
+                <div class="flex items-center gap-2.5 text-gray-400">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 01-.023-.156.49.49 0 01.201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.032zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+                    <div>
+                        <p class="text-[11px] opacity-60 mb-0.5">微信咨询</p>
+                        <p class="text-white">+86 13331522033</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2.5 text-gray-400">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <div>
+                        <p class="text-[11px] opacity-60 mb-0.5">WhatsApp</p>
+                        <p class="text-white">+852 46774746</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2.5 text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <div>
+                        <p class="text-[11px] opacity-60 mb-0.5">邮箱</p>
+                        <p class="text-white">vienne.elitebay.cn</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/5 py-8 text-center text-gray-600 text-sm relative z-10">
-        <p class="font-mono">© 2026 Vienne. AI Product Full-Stack Engineer.</p>
+    <footer class="bg-gray-950 text-gray-500 py-10 border-t border-gray-900">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2.5">
+                    <img src="image/elitebay-logow.svg" alt="EliteBay" class="w-7 h-9 object-contain opacity-80">
+                    <div>
+                        <p class="text-white font-medium text-[14px]">EliteBay</p>
+                        <p class="text-[11px]" data-i18n-key="footer.tagline">语言培训 · 留学 · 国际教育</p>
+                    </div>
+                </div>
+                <div class="flex gap-5 text-[12px]">
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#" class="hover:text-white transition-colors">Facebook</a>
+                    <a href="#" class="hover:text-white transition-colors">微信</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-900 text-center text-[11px]">
+                <p data-i18n-key="footer.copyright">&copy; 2024 EliteBay. 全球精英教育新范式</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Chat Widget -->
-    <div id="chatWidget" class="fixed bottom-24 right-6 w-80 glass rounded-2xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] transform translate-y-[150%] transition-transform duration-300 z-50 overflow-hidden backdrop-blur-xl">
-        <div class="bg-gradient-to-r from-neon-cyan/20 to-neon-purple/20 p-4 border-b border-white/10 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-black border border-neon-cyan overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop" class="w-full h-full object-cover opacity-80">
-            </div>
-            <div>
-                <h4 class="font-bold text-white text-sm">AI 分身</h4>
-                <p class="text-xs text-neon-cyan">Online</p>
-            </div>
-            <button onclick="toggleChat()" class="ml-auto text-gray-400 hover:text-white">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <div class="h-64 overflow-y-auto p-4 space-y-3 bg-black/40">
-            <div class="bg-white/5 p-3 rounded-xl text-sm text-gray-300 border border-white/5">
-                你好！我是 Vienne 的 AI 分身。关于 AI Agent 技术、AI教育产品或者跨时区项目管理经验，都可以向我咨询。
-            </div>
-        </div>
-        <div class="p-3 bg-black/40 border-t border-white/10">
-            <div class="flex gap-2">
-                <input type="text" placeholder="输入消息..." class="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan/50">
-                <button class="w-10 h-10 bg-neon-cyan/20 border border-neon-cyan/50 text-neon-cyan rounded-full flex items-center justify-center hover:bg-neon-cyan/30 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Generate Stars
-        function createStars() {
-            const starfield = document.getElementById('starfield');
-            for (let i = 0; i < 300; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = Math.random() * 3 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-                star.style.setProperty('--delay', Math.random() * 5 + 's');
-                starfield.appendChild(star);
+        // Modal functions
+        function openModal() {
+            document.getElementById('qrModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'qrModal' || event.target.tagName === 'BUTTON') {
+                document.getElementById('qrModal').classList.remove('active');
+                document.body.style.overflow = '';
             }
         }
-        createStars();
 
-        // Generate Asteroid Belt
-        function createAsteroids() {
-            const belt = document.getElementById('asteroidBelt');
-            for (let i = 0; i < 50; i++) {
-                const asteroid = document.createElement('div');
-                asteroid.className = 'asteroid';
-                const angle = (i / 50) * 360;
-                asteroid.style.left = 50 + Math.cos(angle * Math.PI / 180) * 50 + '%';
-                asteroid.style.top = 50 + Math.sin(angle * Math.PI / 180) * 50 + '%';
-                belt.appendChild(asteroid);
-            }
+        // 预约表单：提交后打开访客邮箱，预填发给 vienne@elitebay.cn 的邮件，无需其他配置
+        function submitContactForm(e) {
+            e.preventDefault();
+            var form = document.getElementById('contactForm');
+            var name = (form.name && form.name.value) ? form.name.value.trim() : '';
+            var phone = (form.phone && form.phone.value) ? form.phone.value.trim() : '';
+            var needEls = form.querySelectorAll('input[name="需求"]:checked');
+            var 需求 = Array.from(needEls).map(function(el) { return el.value; }).join('、');
+            var 城市 = (form.querySelector('input[name="城市"]') && form.querySelector('input[name="城市"]').value) ? form.querySelector('input[name="城市"]').value.trim() : '';
+            var 线上线下 = (form.querySelector('select[name="线上线下"]') && form.querySelector('select[name="线上线下"]').value) ? form.querySelector('select[name="线上线下"]').value : '';
+            var 备注 = (form.querySelector('input[name="备注"]') && form.querySelector('input[name="备注"]').value) ? form.querySelector('input[name="备注"]').value.trim() : '';
+            var body = '姓名：' + name + '\n电话：' + phone + '\n需求：' + (需求 || '未选') + '\n城市：' + (城市 || '未填') + '\n上课方式：' + (线上线下 || '未选') + (备注 ? '\n备注：' + 备注 : '');
+            var mailto = 'mailto:vienne@elitebay.cn?subject=' + encodeURIComponent('预约免费咨询 - EliteBay') + '&body=' + encodeURIComponent(body);
+            window.location.href = mailto;
+            alert('已为您打开邮件，请发送后即可。若未打开邮箱，请直接添加微信 Vienne71。');
+            closeModal({ target: { tagName: 'BUTTON' } });
+            return false;
         }
-        createAsteroids();
 
-        // Filter functionality
-        function filterNotes(category) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-neon-cyan/10', 'text-neon-cyan', 'border-neon-cyan');
-                btn.classList.add('border-white/20', 'text-gray-400');
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
-            event.target.classList.remove('border-white/20', 'text-gray-400');
-            event.target.classList.add('bg-neon-cyan/10', 'text-neon-cyan', 'border-neon-cyan');
+        }, { threshold: 0.1 });
 
-            document.querySelectorAll('.note-card').forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.style.opacity = '1', 10);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 简易多语言配置（中 / 英 / 日 / 韩 / 粤）
+        const messages = {
+            zh: {
+                'nav.brand': 'EliteBay',
+                'nav.about': '关于',
+                'nav.services': '服务',
+                'nav.ai': 'AI+教育',
+                'nav.team': '团队',
+                'nav.contact': '联系我们',
+                'hero.title': '为孩子提供 <em class="not-italic text-blue-900">顶级</em> 学习陪伴体验',
+                'hero.subtitle': '我们来自 QS 全球前 20 名校，深度理解国际学校体系，为孩子打造稳健、个性化的长期成长路径。',
+                'hero.cta.primary': '预约免费咨询',
+                'hero.cta.secondary': '查看服务详情',
+                'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>雅思保分计划',
+                'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>名校申请指导',
+                'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>海外求职陪跑',
+                'about.title': '看到真正的 <em class="not-italic text-blue-900">专业陪伴</em> 在发生',
+                'about.subtitle': '我们以专业方法与温和引导，让每一次互动都更有效、更有连接感。从学习规划到课堂沟通，每一个细节都基于孩子的性格与需求设计。',
+                'services.title': '为每位学生 <em class="not-italic text-blue-900">量身打造</em> 的学习方案',
+                'services.subtitle': '无论是需要系统性的长期陪伴，还是短期学习提升，我们都会根据孩子的性格、基础与目标制定最适合的学习方案。',
+                'ai.badge': '智能化教学',
+                'ai.title': 'AI + 教育，<em class="not-italic text-blue-900">重新定义</em> 学习体验',
+                'ai.subtitle': '通过多年教学经验老师输入知识库与教研知识；融入陪伴式教学数字人，配合真人老师实现真正意义上动态 1V1 私人学业订制。',
+                'cta.title': '准备好开启孩子的 <em class="not-italic text-blue-400">精英教育</em> 之旅了吗？',
+                'cta.subtitle': '我们坚信每一个孩子都有潜力改变世界，我们的目标就是最大化发挥孩子自身优势。',
+                'cta.btn1': '预约免费咨询',
+                'cta.btn2': '查看服务案例',
+                'quote.text': '孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求，让他的学习状态完全改观。',
+                'quote.caption': '— 现在他每天都期待上课',
+                'about.mission.title': '我们的使命',
+                'about.mission.desc': '以 AI、心理、脑科学为核，重构教育范式。唤醒孩子天赋，领航菁英成长，让每个孩子都具备改变世界的潜能。',
+                'about.vision.title': '我们的愿景',
+                'about.vision.desc': '成为定义下一代精英教育的引领者。让每个孩子精准激活潜能，成长为兼具硬核能力与独立人格的未来领航者。',
+                'about.talent.title': '我们的人才观',
+                'about.talent.desc': '聚专业同路人：既懂 AI、心理、脑科学的教育落地逻辑，兼具教育行业资深实操经验或国际视野。',
+                'services.card1.title': '国际学校学业陪伴',
+                'services.card1.desc': '教研团队来自 QS 前 15 藤校，教授的不止于知识，更在于终身学习的方法和思维能力。',
+                'services.card2.title': 'AI + 语言培训',
+                'services.card2.desc': 'AI 对话测试词汇量、口语对练，配备大量题库，按真实场景制定合理且能坚持的学习计划。',
+                'services.card3.title': '留学申请 + 求职陪跑',
+                'services.card3.desc': '从语言到留学到研学校友圈打通到求职辅导形成一站式闭环，链接海外企业资源。',
+                'services.card4.title': '全球研学团',
+                'services.card4.desc': '拓宽视野拓展海外校友圈，研学团遍布全球高校，让学生在研学中突破校友圈形成海外校友联盟。',
+                'services.custom_title': '定制属于孩子的个性化学习服务',
+                'services.d1.title': '学习诊断评估',
+                'services.d1.desc': '通过专业评估工具全面了解孩子的学科基础、学习习惯与思维特点，为后续学习制定精准方向。',
+                'services.d2.title': '学科专项提升（阅读/写作/数学）',
+                'services.d2.desc': '针对薄弱学科进行系统强化训练，通过讲解、练习与反馈帮助孩子快速补齐短板。',
+                'services.d3.title': '表达能力训练（口语/演讲）',
+                'services.d3.desc': '提升孩子的表达自信与逻辑结构能力，适用于国际学校课堂讨论与展示。',
+                'services.d4.title': '学习习惯养成',
+                'services.d4.desc': '帮助孩子建立专注力、时间管理、任务拆解等关键学习习惯，实现自主高效学习。',
+                'ai.item1.title': 'AdmitScope 智能择校',
+                'ai.item1.desc': '3分钟算出你的梦校成功率，通过 AI 技术根据学生性格与职业测试指定专属学院的专业，并提供录取成功率报告。',
+                'ai.item2.title': 'AI 雅思学习',
+                'ai.item2.desc': '词汇量检测；AI 口语对练，并形成总结报告与复盘笔记；配备大量题库，按真实场景制定合理且能坚持的学生每日学习计划。',
+                'ai.item3.title': 'AI 测评与 AI 老师带学',
+                'ai.item3.desc': '真正的短期高效提分，告别模板化教学。学不会？没兴趣？趣味驱动，让你爱上学习，教到会为止！',
+                'ai.side1': '海外学习-生活-工作全链陪伴',
+                'ai.side2': '依托团队自身大量资源链接海外企业资源',
+                'team.title': '来自 <em class="not-italic text-blue-900">顶尖名校</em> 的导师团队',
+                'team.subtitle': 'TQS TOP 15 海外硕博，专注提升学生学习内驱力、专注力，帮助学生培养终生受用的学习系统。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大学硕士',
+                'team.vienne.desc': '依托2年国际教育教学经验心得制定陪伴式教学SOP，至今已成功助力300+学员留学考试中快速提升能力与自信。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大学硕士',
+                'team.sylvia.desc': '深耕留学申请，熟悉英美澳港多国院校体系，累计指导同学斩获100+份世界名校offer。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '美国Top10硕士 · 教研主管',
+                'team.ava.desc': '深耕英语教学、师资培训与课程设计多年，覆盖初高中英语、日常/商务/雅思/面试口语全学段。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '帝国理工硕士 · 雅思8.5',
+                'team.louise.desc': '3年教学经验，英本英硕独特教学体系，学员雅思通过率98%，阅读听力满分口语8分。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '悉尼大学硕士',
+                'team.tiffany.desc': '金融和国际商务双硕士，擅长跨国企业课程以及市场营销，HD机构4年经验。',
+                'team.join_title': '加入天才计划',
+                'team.join_subtitle': '成为定义下一代精英教育的引领者',
+                'team.join_btn': '点击扫码咨询',
+                'testimonials.title': '家长们这样 <em class="not-italic text-blue-900">评价</em> 我们的陪伴服务',
+                'testimonials.t1.text': '孩子学习已经一年多了，最大的变化就是变得更自信、更主动。学习不再需要催促，作业质量也提升明显。',
+                'testimonials.t1.name': '李女士',
+                'testimonials.t1.role': '国际学校家长',
+                'testimonials.t2.text': '孩子以前对学习非常抵触，但自从遇到你们后，他开始主动投入课堂。老师不仅耐心、专业，更真正理解孩子的性格和需求。',
+                'testimonials.t2.name': '王先生',
+                'testimonials.t2.role': '雅思学员家长',
+                'testimonials.t3.text': '孩子基础比较薄弱，你们帮我们系统梳理了知识点，也教了很多学习方法。一个学期下来成绩稳步提升，特别惊喜。',
+                'testimonials.t3.name': '张女士',
+                'testimonials.t3.role': '美本申请家长',
+                'footer.tagline': '语言培训 · 留学 · 国际教育',
+                'footer.copyright': '© 2024 EliteBay. 全球精英教育新范式'
+            },
+            en: {
+                'nav.brand': 'EliteBay',
+                'nav.about': 'About',
+                'nav.services': 'Services',
+                'nav.ai': 'AI + Education',
+                'nav.team': 'Team',
+                'nav.contact': 'Contact Us',
+                'hero.title': 'Premium learning companionship <em class="not-italic text-blue-900">for every child</em>',
+                'hero.subtitle': 'Our mentors come from QS Top 200 / Top 20 universities worldwide and deeply understand international school systems to design long‑term, personalised growth paths.',
+                'hero.cta.primary': 'Book a free consultation',
+                'hero.cta.secondary': 'View service details',
+                'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>IELTS score‑guarantee program',
+                'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>Top‑school application coaching',
+                'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>Overseas career coaching',
+                'about.title': 'Where truly <em class="not-italic text-blue-900">professional companionship</em> happens',
+                'about.subtitle': 'With professional methods and gentle guidance, our mentors make every interaction effective and connected, from planning to classroom communication.',
+                'services.title': 'Tailor‑made learning plans <em class="not-italic text-blue-900">for every student</em>',
+                'services.subtitle': 'Whether long‑term support or short‑term boost, we design the best plan based on each child’s personality, foundation and goals.',
+                'ai.badge': 'Smart teaching',
+                'ai.title': 'AI + Education, <em class="not-italic text-blue-900">redefining</em> learning experience',
+                'ai.subtitle': 'We combine teachers’ years of experience with AI‑driven digital mentors to deliver truly dynamic 1‑on‑1 personalised learning.',
+                'cta.title': 'Ready to start your child’s <em class="not-italic text-blue-400">elite education</em> journey?',
+                'cta.subtitle': 'We believe every child can change the world; our mission is to maximise their unique strengths.',
+                'cta.btn1': 'Book a free consultation',
+                'cta.btn2': 'See success stories',
+                'quote.text': 'My child used to resist learning, but since meeting your mentors, he has become fully engaged in class. The teachers are not only patient and professional but truly understand his personality and needs.',
+                'quote.caption': '— Now he looks forward to every session',
+                'about.mission.title': 'Our Mission',
+                'about.mission.desc': 'With AI, psychology and brain science at our core, we are redefining education. We awaken each child\'s potential and guide elite growth.',
+                'about.vision.title': 'Our Vision',
+                'about.vision.desc': 'To lead the next generation of elite education. We help every child unlock their potential and grow into future leaders.',
+                'about.talent.title': 'Our Values',
+                'about.talent.desc': 'We bring together experts who understand AI, psychology and brain science in education, with deep practical experience and global perspective.',
+                'services.card1.title': 'International School Tutoring',
+                'services.card1.desc': 'Our team from QS Top 15 and Ivy League schools teaches not only knowledge but lifelong learning methods and thinking.',
+                'services.card2.title': 'AI + Language Training',
+                'services.card2.desc': 'AI-powered vocabulary and speaking practice, large question banks, and realistic study plans that students can stick to.',
+                'services.card3.title': 'Study Abroad + Career Coaching',
+                'services.card3.desc': 'End-to-end support from language to applications to alumni networks and career guidance.',
+                'services.card4.title': 'Global Study Tours',
+                'services.card4.desc': 'Expand horizons and build international networks. Tours across top universities worldwide.',
+                'services.custom_title': 'Personalised learning services for every child',
+                'services.d1.title': 'Learning Assessment',
+                'services.d1.desc': 'Professional tools to understand your child\'s foundation, habits and thinking style.',
+                'services.d2.title': 'Subject Boost (Reading / Writing / Math)',
+                'services.d2.desc': 'Targeted support for weaker subjects with structured practice and feedback.',
+                'services.d3.title': 'Expression & Presentation',
+                'services.d3.desc': 'Build confidence and structure in speaking and presenting for class discussions.',
+                'services.d4.title': 'Study Habits',
+                'services.d4.desc': 'Develop focus, time management and task breakdown for independent, effective learning.',
+                'ai.item1.title': 'AdmitScope Smart School Match',
+                'ai.item1.desc': 'Get your dream-school admission odds in minutes. AI recommends programmes and report acceptance rates.',
+                'ai.item2.title': 'AI IELTS Learning',
+                'ai.item2.desc': 'Vocabulary checks, AI speaking practice with reports and notes, plus question banks and realistic daily plans.',
+                'ai.item3.title': 'AI Assessment & AI-Guided Learning',
+                'ai.item3.desc': 'Short-term score gains without templates. We make learning fun and keep teaching until it clicks.',
+                'ai.side1': 'Study–life–career support overseas',
+                'ai.side2': 'Backed by our team\'s resources and overseas employer links',
+                'team.title': 'Mentors from <em class="not-italic text-blue-900">top universities</em> worldwide',
+                'team.subtitle': 'QS Top 15 overseas masters and PhDs, focused on motivation, focus and a learning system that lasts a lifetime.',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': 'Master\'s degree, The University of Hong Kong',
+                'team.vienne.desc': 'With 2 years of international education experience, she has built a companionship-based teaching SOP and helped 300+ students quickly improve ability and confidence in exams.',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': 'Master\'s degree, City University of Hong Kong',
+                'team.sylvia.desc': 'Specialised in study abroad applications, familiar with admissions systems across the UK, US, Australia and Hong Kong, guiding students to 100+ offers from top universities.',
+                'team.ava.name': 'Ava',
+                'team.ava.role': 'Master\'s degree, Top 10 US university · Academic Director',
+                'team.ava.desc': 'Years of experience in English teaching, teacher training and curriculum design, covering secondary English, daily/business English, IELTS and interview speaking.',
+                'team.louise.name': 'Louise',
+                'team.louise.role': 'Master\'s degree, Imperial College London · IELTS 8.5',
+                'team.louise.desc': '3 years of teaching experience with a unique UK-undergrad and postgrad teaching system; IELTS pass rate 98% with full scores in reading and listening and 8.0 in speaking.',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': 'Master\'s degree, University of Sydney',
+                'team.tiffany.desc': 'Double master\'s degrees in Finance and International Business, experienced in multinational business courses and marketing, with 4 years at an HD education institution.',
+                'team.join_title': 'Join the Talent Programme',
+                'team.join_subtitle': 'Help define the next generation of elite education',
+                'team.join_btn': 'Scan to contact',
+                'testimonials.title': 'What parents <em class="not-italic text-blue-900">say</em> about our mentoring',
+                'testimonials.t1.text': 'After over a year with the mentors, the biggest change is more confidence and initiative. Homework quality has improved a lot.',
+                'testimonials.t1.name': 'Ms Li',
+                'testimonials.t1.role': 'International school parent',
+                'testimonials.t2.text': 'My child used to resist learning. Since meeting your mentors he has engaged actively in class.',
+                'testimonials.t2.name': 'Mr Wang',
+                'testimonials.t2.role': 'IELTS student parent',
+                'testimonials.t3.text': 'Our child started with a weak base. The mentors helped us organise the content and taught study methods. Results had clearly improved by the end of the term.',
+                'testimonials.t3.name': 'Ms Zhang',
+                'testimonials.t3.role': 'US undergraduate applicant parent',
+                'footer.tagline': 'Language · Study abroad · International education',
+                'footer.copyright': '© 2024 EliteBay. A new paradigm in global elite education'
+            },
+            ja: {
+                'nav.brand': 'EliteBay',
+                'nav.about': '概要',
+                'nav.services': 'サービス',
+                'nav.ai': 'AI×教育',
+                'nav.team': 'チーム',
+                'nav.contact': 'お問い合わせ',
+                'hero.title': '子どものための <em class="not-italic text-blue-900">プレミアム</em> 学習伴走体験',
+                'hero.subtitle': 'QS世界トップ200/トップ20大学出身のメンターが、インターナショナルスクールの仕組みを深く理解し、長期的で個別最適な成長プランを設計します。',
+                'hero.cta.primary': '無料相談を予約する',
+                'hero.cta.secondary': 'サービス詳細を見る',
+                'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>IELTS保証プログラム',
+                'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>名門校受験コーチング',
+                'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>海外就職伴走',
+                'about.title': '本当の <em class="not-italic text-blue-900">プロの伴走</em> がここに',
+                'about.subtitle': 'メンターは専門的な手法と丁寧な導きで、毎回のやり取りを効果的につなげます。学習計画から授業コミュニケーションまで、お子様の性格とニーズに基づいて設計します。',
+                'services.title': '一人ひとりに <em class="not-italic text-blue-900">合わせた</em> 学習プラン',
+                'services.subtitle': '長期伴走でも短期集中でも、お子様の性格・基礎・目標に合わせて最適なプランを設計します。',
+                'ai.badge': 'スマート教育',
+                'ai.title': 'AI×教育で <em class="not-italic text-blue-900">学び</em> を再定義',
+                'ai.subtitle': '豊富な指導経験を知識庫に取り込み、AI伴走デジタル人と真人教師で、真の1対1個別学習を実現します。',
+                'cta.title': 'お子様の <em class="not-italic text-blue-400">エリート教育</em> を始めますか？',
+                'cta.subtitle': 'すべての子どもに世界を変える力があると信じ、その可能性を最大限に引き出すことが私たちの使命です。',
+                'cta.btn1': '無料相談を予約',
+                'cta.btn2': '事例を見る',
+                'quote.text': '以前は勉強を嫌がっていましたが、メンターに出会ってから授業に積極的に参加するようになりました。先生方は忍耐強く専門的で、子どもの性格とニーズを本当に理解してくれています。',
+                'quote.caption': '— 今では毎回の授業を楽しみにしています',
+                'about.mission.title': '私たちの使命',
+                'about.mission.desc': 'AI・心理学・脳科学を核に、教育の形を再構築。子どもの才能を引き出し、エリート成長を導き、世界を変える力を育てます。',
+                'about.vision.title': '私たちのビジョン',
+                'about.vision.desc': '次世代エリート教育を定義するリーダーとなる。一人ひとりの可能性を開花させ、実力と人格を備えた未来のリーダーを育てます。',
+                'about.talent.title': '私たちの人材観',
+                'about.talent.desc': 'AI・心理・脳科学の教育実践に通じ、教育現場の豊富な経験または国際的視野を持つ専門家を集めます。',
+                'services.card1.title': 'インターナショナルスクール学習伴走',
+                'services.card1.desc': 'QSトップ15・アイビーリーグ出身の教研チームが、知識だけでなく生涯学習の方法と思考力を教えます。',
+                'services.card2.title': 'AI＋語学研修',
+                'services.card2.desc': 'AIで語彙力測定・スピーキング練習、豊富な題庫で実践に即した無理のない学習計画を設計。',
+                'services.card3.title': '留学申請＋就職伴走',
+                'services.card3.desc': '語学から留学・校友ネットワーク・就職指導まで一貫サポート、海外企業リソースと連携。',
+                'services.card4.title': 'グローバル研修ツアー',
+                'services.card4.desc': '視野を広げ海外校友ネットワークを構築。世界各地の大学で研修を実施。',
+                'services.custom_title': 'お子様に合わせた個別学習サービス',
+                'services.d1.title': '学習診断・評価',
+                'services.d1.desc': '専門ツールでお子様の基礎・学習習慣・思考特性を把握し、最適な学習方針を立てます。',
+                'services.d2.title': '科目別強化（読解／ライティング／数学）',
+                'services.d2.desc': '苦手科目を系統的に強化。解説・演習・フィードバックで短期間に底上げします。',
+                'services.d3.title': '表現力トレーニング（スピーキング／プレゼン）',
+                'services.d3.desc': '自信と論理構成を養い、授業でのディスカッションや発表に活かします。',
+                'services.d4.title': '学習習慣の定着',
+                'services.d4.desc': '集中力・時間管理・タスク分解などの習慣を身につけ、自律的な学習を実現します。',
+                'ai.item1.title': 'AdmitScope スマート校選び',
+                'ai.item1.desc': '3分で夢校合格率を算出。AIが性格・適性に基づき専用の専攻と合格率レポートを提供。',
+                'ai.item2.title': 'AI IELTS学習',
+                'ai.item2.desc': '語彙力測定、AIスピーキング練習とサマリー・復習ノート、豊富な題庫で実践的な毎日プラン。',
+                'ai.item3.title': 'AI評価・AI教師伴走',
+                'ai.item3.desc': '短期で確実にスコアアップ。テンプレートではなく、楽しく「できるまで」教えます。',
+                'ai.side1': '海外の学び・生活・就職まで一貫伴走',
+                'ai.side2': '自社リソースと海外企業との連携でサポート',
+                'team.title': '<em class="not-italic text-blue-900">トップ大学</em> 出身のメンター陣',
+                'team.subtitle': 'QSトップ15海外修士・博士。学習意欲・集中力の向上と、一生使える学習システムの構築に注力。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大学修士',
+                'team.vienne.desc': '国際教育現場での2年間の経験をもとに、伴走型SOPを構築。これまで300名以上の留学試験でスコアアップと自信向上をサポート。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大学修士',
+                'team.sylvia.desc': '留学出願サポートに精通し、英米豪・香港の出願制度を熟知。これまで100件以上の世界トップ大学オファー獲得を支援。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '米国トップ10大学修士・教研ディレクター',
+                'team.ava.desc': '英語教育・講師トレーニング・カリキュラム設計の豊富な経験を持ち、中高英語から日常・ビジネス英語、IELTS・面接対策まで幅広く担当。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': 'インペリアル・カレッジ・ロンドン修士・IELTS 8.5',
+                'team.louise.desc': '3年以上の指導経験。独自の英国式カリキュラムで、IELTS合格率98％、リスニング・リーディング満点、スピーキング8.0を達成した実績を持つ。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': 'シドニー大学修士',
+                'team.tiffany.desc': '金融・国際ビジネスのダブル修士号を持ち、多国籍企業のケーススタディと学生のキャリア設計を結びつける指導が得意。HD教育機関で4年以上の経験。',
+                'team.join_title': '天才プログラムに参加',
+                'team.join_subtitle': '次世代エリート教育を共に創る',
+                'team.join_btn': 'スキャンして問い合わせ',
+                'testimonials.title': '保護者様の <em class="not-italic text-blue-900">声</em>',
+                'testimonials.t1.text': 'メンターと学び始めて1年以上。一番の変化は自信と主体性です。宿題の質も明らかに上がりました。',
+                'testimonials.t1.name': '李さん',
+                'testimonials.t1.role': 'インターナショナルスクール保護者',
+                'testimonials.t2.text': '以前は勉強を嫌がっていましたが、メンターに出会ってから授業に積極的に参加するように。先生方は忍耐強く、子どもの性格とニーズを本当に理解してくれています。',
+                'testimonials.t2.name': '王さん',
+                'testimonials.t2.role': 'IELTS受講生保護者',
+                'testimonials.t3.text': '基礎が弱かったのですが、メンターが系統的に整理し学習法も教えてくれました。一学期で成績が着実に伸び、とても嬉しいです。',
+                'testimonials.t3.name': '張さん',
+                'testimonials.t3.role': '米国大学受験保護者',
+                'footer.tagline': '語学・留学・国際教育',
+                'footer.copyright': '© 2024 EliteBay. グローバルエリート教育の新パラダイム'
+            },
+            ko: {
+                'nav.brand': 'EliteBay',
+                'nav.about': '소개',
+                'nav.services': '서비스',
+                'nav.ai': 'AI+교육',
+                'nav.team': '팀',
+                'nav.contact': '문의하기',
+                'hero.title': '아이를 위한 <em class="not-italic text-blue-900">프리미엄</em> 학습 동반 경험',
+                'hero.subtitle': 'QS 세계 상위 200/20위 대학 출신 멘토들이 국제학교 시스템을 깊이 이해하고, 장기적·개인화된 성장 로드맵을 설계합니다.',
+                'hero.cta.primary': '무료 상담 예약',
+                'hero.cta.secondary': '서비스 자세히 보기',
+                'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>IELTS 점수 보장 프로그램',
+                'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>명문학교 입시 코칭',
+                'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>해외 취업 동반',
+                'about.title': '진정한 <em class="not-italic text-blue-900">전문 동반</em> 이 여기 있습니다',
+                'about.subtitle': '전문적인 방법과 부드러운 지도로, 멘토는 매 상호작용을 효과적이고 유대감 있게 만듭니다. 학습 설계부터 수업 소통까지, 아이의 성격과 니즈에 맞춥니다.',
+                'services.title': '학생맞춤 <em class="not-italic text-blue-900">학습</em> 프로그램',
+                'services.subtitle': '장기 동반이든 단기 집중이든, 아이의 성격·기초·목표에 맞는 최적의 학습 계획을 설계합니다.',
+                'ai.badge': '스마트 교육',
+                'ai.title': 'AI + 교육으로 <em class="not-italic text-blue-900">학습</em> 경험 재정의',
+                'ai.subtitle': '다년간의 교수 경험을 지식 데이터에 반영하고, AI 동반 디지털 멘토와 실인 강사로 진정한 1:1 맞춤 학습을 제공합니다.',
+                'cta.title': '아이의 <em class="not-italic text-blue-400">엘리트 교육</em> 여정을 시작할 준비가 되셨나요?',
+                'cta.subtitle': '모든 아이에게 세상을 바꿀 잠재력이 있다고 믿으며, 그 잠재력을 최대한 끌어내는 것이 우리의 목표입니다.',
+                'cta.btn1': '무료 상담 예약',
+                'cta.btn2': '성공 사례 보기',
+                'quote.text': '예전에는 공부를 싫어했는데, 멘토님을 만난 후 수업에 적극적으로 참여하게 됐어요. 선생님들은 인내심 있고 전문적이며, 아이 성격과 니즈를 정말 잘 이해해 주세요.',
+                'quote.caption': '— 이제 매 수업을 기다린대요',
+                'about.mission.title': '우리의 사명',
+                'about.mission.desc': 'AI·심리·뇌과학을 핵심으로 교육 패러다임을 재구성합니다. 아이의 재능을 깨우고, 엘리트 성장을 이끌며, 세상을 바꿀 잠재력을 키웁니다.',
+                'about.vision.title': '우리의 비전',
+                'about.vision.desc': '차세대 엘리트 교육을 정의하는 리더가 됩니다. 모든 아이가 잠재력을 발휘하고, 실력과 인격을 갖춘 미래 리더로 성장하도록 합니다.',
+                'about.talent.title': '우리의 인재관',
+                'about.talent.desc': 'AI·심리·뇌과학의 교육 현장 적용에 통달하고, 교육 분야 경력 또는 국제 시야를 갖춘 전문가를 모읍니다.',
+                'services.card1.title': '국제학교 학습 동반',
+                'services.card1.desc': 'QS 상위 15·아이비리그 출신 연구팀이 지식뿐 아니라 평생 학습 방법과 사고력을 가르칩니다.',
+                'services.card2.title': 'AI + 어학 연수',
+                'services.card2.desc': 'AI 어휘·회화 연습, 다양한 문제 데이터로 실전에 맞는 꾸준히 할 수 있는 학습 계획을 설계합니다.',
+                'services.card3.title': '유학 지원 + 취업 동반',
+                'services.card3.desc': '어학부터 유학·동문 네트워크·취업 코칭까지 원스톱 지원, 해외 기업 자원과 연계합니다.',
+                'services.card4.title': '글로벌 연수단',
+                'services.card4.desc': '시야를 넓히고 해외 동문 네트워크를 구축합니다. 전 세계 대학에서 연수를 진행합니다.',
+                'services.custom_title': '아이에 맞춘 맞춤형 학습 서비스',
+                'services.d1.title': '학습 진단·평가',
+                'services.d1.desc': '전문 도구로 아이의 기초·학습 습관·사고 특성을 파악하고, 이후 학습 방향을 정합니다.',
+                'services.d2.title': '과목별 집중 (독해/작문/수학)',
+                'services.d2.desc': '취약 과목을 체계적으로 보강합니다. 설명·연습·피드백으로 빠르게 따라잡습니다.',
+                'services.d3.title': '표현력 훈련 (회화/발표)',
+                'services.d3.desc': '자신감과 논리 구조를 키워, 수업 토론과 발표에 활용합니다.',
+                'services.d4.title': '학습 습관 형성',
+                'services.d4.desc': '집중력·시간 관리·과제 분해 등 핵심 습관을 갖추어 스스로 효율적으로 학습하도록 합니다.',
+                'ai.item1.title': 'AdmitScope 스마트 학교 매칭',
+                'ai.item1.desc': '3분 만에 드림스쿨 합격 가능률 산출. AI가 성격·적성에 맞춰 전용 전공과 합격률 리포트를 제공합니다.',
+                'ai.item2.title': 'AI IELTS 학습',
+                'ai.item2.desc': '어휘력 검사, AI 회화 연습과 요약·복습 노트, 다양한 문제 데이터로 실전에 가까운 일일 학습 계획.',
+                'ai.item3.title': 'AI 평가·AI 선생 동반',
+                'ai.item3.desc': '단기 고득점, 템플릿 없이. 재미있게 가르치고, 될 때까지 가르칩니다.',
+                'ai.side1': '해외 학습·생활·취업 전 과정 동반',
+                'ai.side2': '팀 자체 자원과 해외 기업 연계로 지원',
+                'team.title': '<em class="not-italic text-blue-900">최상위 대학</em> 출신 멘토팀',
+                'team.subtitle': 'QS 상위 15 해외 석·박사. 학습 동기·집중력 향상과 평생 쓸 학습 시스템 구축에 집중합니다.',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '홍콩대학교 석사',
+                'team.vienne.desc': '국제 교육 현장에서 2년간 쌓은 경험을 바탕으로 동반형 SOP를 구축했으며, 지금까지 300+명의 유학 시험에서 실력과 자신감 향상을 도왔습니다.',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '홍콩 시티대학교 석사',
+                'team.sylvia.desc': '유학 지원에 특화되어 있으며 영·미·호·홍콩 입시 제도를 잘 이해하고 있습니다. 지금까지 100건 이상의 세계 명문대 합격을 이끌었습니다.',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '미국 Top 10 대학 석사 · 교研 디렉터',
+                'team.ava.desc': '영어 교육, 교사 트레이닝, 커리큘럼 설계에 다년간 경험이 있으며, 중·고등 영어부터 일상/비즈니스 영어, IELTS 및 인터뷰 스피킹까지 전 학년을 담당합니다.',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '임페리얼 칼리지 런던 석사 · IELTS 8.5',
+                'team.louise.desc': '3년 이상 티칭 경험과 영국식 학습 시스템을 바탕으로 IELTS 합격률 98%, 리딩·리스닝 만점, 스피킹 8.0의 성과를 보유하고 있습니다.',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '시드니대학교 석사',
+                'team.tiffany.desc': '금융 및 국제경영 복수 석사로, 다국적 기업 케이스와 학생의 커리어 설계를 연결하는 데 강점이 있으며, HD 교육기관 4년 경력을 보유하고 있습니다.',
+                'team.join_title': '천재 프로그램 참여',
+                'team.join_subtitle': '차세대 엘리트 교육을 함께 정의합니다',
+                'team.join_btn': '스캔하여 문의',
+                'testimonials.title': '학부모님이 <em class="not-italic text-blue-900">말씀하시는</em> 동반 서비스',
+                'testimonials.t1.text': '멘토와 함께한 지 1년 넘었어요. 가장 큰 변화는 자신감과 적극성이에요. 숙제 품질도 눈에 띄게 좋아졌어요.',
+                'testimonials.t1.name': '이씨',
+                'testimonials.t1.role': '국제학교 학부모',
+                'testimonials.t2.text': '예전에는 공부를 싫어했는데, 멘토님을 만난 후 수업에 적극 참여하게 됐어요. 선생님들은 인내심 있고 전문적이에요.',
+                'testimonials.t2.name': '왕씨',
+                'testimonials.t2.role': 'IELTS 수강생 학부모',
+                'testimonials.t3.text': '기초가 약했는데, 멘토님이 체계적으로 정리해 주시고 학습법도 알려주셨어요. 한 학기 만에 성적이 꾸준히 올랐어요.',
+                'testimonials.t3.name': '장씨',
+                'testimonials.t3.role': '미국 본과 지원 학부모',
+                'footer.tagline': '어학 · 유학 · 국제 교육',
+                'footer.copyright': '© 2024 EliteBay. 글로벌 엘리트 교육의 새 패러다임'
+            },
+            yue: {
+                'nav.brand': 'EliteBay',
+                'nav.about': '關於',
+                'nav.services': '服務',
+                'nav.ai': 'AI+教育',
+                'nav.team': '團隊',
+                'nav.contact': '聯絡我哋',
+                'hero.title': '為細路提供 <em class="not-italic text-blue-900">頂級</em> 學習陪伴體驗',
+                'hero.subtitle': '陪伴師團隊來自 QS 全球前200 / 前20 名校，熟悉國際學校體系，為學生設計穩陣又個性化嘅長期成長路線。',
+                'hero.cta.primary': '預約免費咨詢',
+                'hero.cta.secondary': '查看服務詳情',
+                'hero.tag1': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>雅思保分計劃',
+                'hero.tag2': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>名校申請指導',
+                'hero.tag3': '<span class="w-1 h-1 bg-green-500 rounded-full"></span>海外求職陪跑',
+                'about.title': '睇到真正嘅 <em class="not-italic text-blue-900">專業陪伴</em> 喺度發生',
+                'about.subtitle': '我哋嘅陪伴師用專業方法同溫和引導，令每次互動都更有效、更有連接感。由學習規劃到課堂溝通，每個細節都係根據細路嘅性格同需求嚟設計。',
+                'services.title': '為每位學生 <em class="not-italic text-blue-900">量身打造</em> 嘅學習方案',
+                'services.subtitle': '無論係需要系統性嘅長期陪伴，定係短期學習提升，我哋都會根據細路嘅性格、基礎同目標制定最啱嘅學習方案。',
+                'ai.badge': '智能化教學',
+                'ai.title': 'AI + 教育，<em class="not-italic text-blue-900">重新定義</em> 學習體驗',
+                'ai.subtitle': '透過多年教學經驗老師輸入知識庫同教研知識；融入陪伴式教學數字人，配合真人老師實現真正意義上嘅動態 1V1 私人學業訂製。',
+                'cta.title': '準備好開啟細路嘅 <em class="not-italic text-blue-400">精英教育</em> 之旅未？',
+                'cta.subtitle': '我哋堅信每個細路都有潛力改變世界，我哋嘅目標就係最大化發揮細路自身優勢。',
+                'cta.btn1': '預約免費咨詢',
+                'cta.btn2': '查看服務案例',
+                'quote.text': '細路以前對學習好抗拒，但自從遇到你哋嘅陪伴師之後，佢開始主動投入課堂。老師唔單止耐心、專業，仲真正理解細路嘅性格同需求，令佢嘅學習狀態完全改觀。',
+                'quote.caption': '— 而家佢日日都期待同陪伴師上課',
+                'about.mission.title': '我哋嘅使命',
+                'about.mission.desc': '以 AI、心理、腦科學為核，重構教育範式。喚醒細路天賦，領航菁英成長，令每個細路都具備改變世界嘅潛能。',
+                'about.vision.title': '我哋嘅願景',
+                'about.vision.desc': '成為定義下一代精英教育嘅引領者。令每個細路精準激活潛能，成長為兼具硬核能力同獨立人格嘅未來領航者。',
+                'about.talent.title': '我哋嘅人才觀',
+                'about.talent.desc': '聚專業同路人：既懂 AI、心理、腦科學嘅教育落地邏輯，兼具教育行業資深實操經驗或國際視野。',
+                'services.card1.title': '國際學校學業陪伴',
+                'services.card1.desc': '教研團隊來自 QS 前 15 藤校，教授嘅唔止於知識，更在於終身學習嘅方法同思維能力。',
+                'services.card2.title': 'AI + 語言培訓',
+                'services.card2.desc': 'AI 對話測試詞彙量、口語對練，配備大量題庫，按真實場景制定合理且能堅持嘅學習計劃。',
+                'services.card3.title': '留學申請 + 求職陪跑',
+                'services.card3.desc': '由語言到留學到研學校友圈打通到求職輔導形成一站式閉環，連結海外企業資源。',
+                'services.card4.title': '全球研學團',
+                'services.card4.desc': '拓寬視野拓展海外校友圈，研學團遍布全球高校，令學生喺研學中突破校友圈形成海外校友聯盟。',
+                'services.custom_title': '訂製屬於細路嘅個性化學習服務',
+                'services.d1.title': '學習診斷評估',
+                'services.d1.desc': '透過專業評估工具全面了解細路嘅學科基礎、學習習慣同思維特點，為後續學習制定精準方向。',
+                'services.d2.title': '學科專項提升（閱讀/寫作/數學）',
+                'services.d2.desc': '針對薄弱學科進行系統強化訓練，透過講解、練習同反饋幫細路快速補齊短板。',
+                'services.d3.title': '表達能力訓練（口語/演講）',
+                'services.d3.desc': '提升細路嘅表達自信同邏輯結構能力，適用於國際學校課堂討論同展示。',
+                'services.d4.title': '學習習慣養成',
+                'services.d4.desc': '幫細路建立專注力、時間管理、任務拆解等關鍵學習習慣，實現自主高效學習。',
+                'ai.item1.title': 'AdmitScope 智能擇校',
+                'ai.item1.desc': '3分鐘算出你嘅夢校成功率，透過 AI 技術根據學生性格同職業測試指定專屬學院嘅專業，並提供錄取成功率報告。',
+                'ai.item2.title': 'AI 雅思學習',
+                'ai.item2.desc': '詞彙量檢測；AI 口語對練，並形成總結報告同覆盤筆記；配備大量題庫，按真實場景制定合理且能堅持嘅學生每日學習計劃。',
+                'ai.item3.title': 'AI 測評與 AI 老師帶學',
+                'ai.item3.desc': '真正嘅短期高效提分，告別模板化教學。學唔會？冇興趣？趣味驅動，令你愛上學習，教到會為止！',
+                'ai.side1': '海外學習-生活-工作全鏈陪伴',
+                'ai.side2': '依託團隊自身大量資源連結海外企業資源',
+                'team.title': '來自 <em class="not-italic text-blue-900">頂尖名校</em> 嘅導師團隊',
+                'team.subtitle': 'TQS TOP 15 海外碩博，專注提升學生學習內驅力、專注力，幫助學生培養終生受用嘅學習系統。',
+                'team.vienne.name': 'Vienne',
+                'team.vienne.role': '香港大學碩士',
+                'team.vienne.desc': '喺國際教育一線累積兩年經驗，搭建出陪伴式教學 SOP，至今幫助 300+ 學員喺留學考試中快速提升能力同自信。',
+                'team.sylvia.name': 'Syvlia',
+                'team.sylvia.role': '香港城市大學碩士',
+                'team.sylvia.desc': '深耕留學申請，熟悉英美澳港多國院校體系，累計幫學生攞到 100+ 份世界名校 offer。',
+                'team.ava.name': 'Ava',
+                'team.ava.role': '美國 Top10 碩士 · 教研主管',
+                'team.ava.desc': '多年英語教學、師資培訓同課程設計經驗，覆蓋初高中英語、日常/商務英語、雅思同面試口語等全階段。',
+                'team.louise.name': 'Louise',
+                'team.louise.role': '帝國理工碩士 · 雅思 8.5',
+                'team.louise.desc': '3 年教學經驗，自成一套英本英碩教學體系，學員雅思通過率 98%，閱讀聽力滿分、口語 8 分。',
+                'team.tiffany.name': 'Tiffany',
+                'team.tiffany.role': '悉尼大學碩士',
+                'team.tiffany.desc': '金融同國際商務雙碩士，擅長將商業案例同學生個人規劃、行業需求同機構機會結合，幫學生打造實戰型競爭力。',
+                'team.join_title': '加入天才計劃',
+                'team.join_subtitle': '成為定義下一代精英教育嘅引領者',
+                'team.join_btn': '點擊掃碼咨詢',
+                'testimonials.title': '家長們咁樣 <em class="not-italic text-blue-900">評價</em> 我哋嘅陪伴服務',
+                'testimonials.t1.text': '細路跟住陪伴師學習已經一年幾，最大嘅變化就係變得更自信、更主動。學習唔再需要催促，作業質量都提升明顯。',
+                'testimonials.t1.name': '李女士',
+                'testimonials.t1.role': '國際學校家長',
+                'testimonials.t2.text': '細路以前對學習好抗拒，但自從遇到你哋嘅陪伴師之後，佢開始主動投入課堂。老師唔單止耐心、專業，更真正理解細路嘅性格同需求。',
+                'testimonials.t2.name': '王先生',
+                'testimonials.t2.role': '雅思學員家長',
+                'testimonials.t3.text': '細路基礎比較薄弱，陪伴師幫我哋系統梳理咗知識點，亦教咗好多學習方法。一個學期落嚟成績穩步提升，特別驚喜。',
+                'testimonials.t3.name': '張女士',
+                'testimonials.t3.role': '美本申請家長',
+                'footer.tagline': '語言培訓 · 留學 · 國際教育',
+                'footer.copyright': '© 2024 EliteBay. 全球精英教育新範式'
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function applyI18n() {
+            document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                const key = el.getAttribute('data-i18n-key');
+                const langPack = messages[currentLang];
+                if (!langPack) return;
+                const msg = langPack[key];
+                if (msg) {
+                    el.innerHTML = msg;
+                }
+            });
+            // 高亮当前语言按钮
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === currentLang) {
+                    btn.classList.add('font-medium', 'text-gray-900');
                 } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
+                    btn.classList.remove('font-medium', 'text-gray-900');
                 }
             });
         }
 
-        function toggleChat() {
-            const widget = document.getElementById('chatWidget');
-            if (widget.classList.contains('translate-y-[150%]')) {
-                widget.classList.remove('translate-y-[150%]');
-                widget.classList.add('translate-y-0');
-            } else {
-                widget.classList.add('translate-y-[150%]');
-                widget.classList.remove('translate-y-0');
-            }
+        function setLang(lang) {
+            currentLang = lang;
+            applyI18n();
         }
+
+        document.addEventListener('DOMContentLoaded', applyI18n);
     </script>
 </body>
 </html>
